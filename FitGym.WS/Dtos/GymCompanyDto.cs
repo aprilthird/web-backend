@@ -10,16 +10,20 @@ namespace FitGym.WS.Dtos
     {
         public int GymCompanyId { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         [StringLength(100)]
         public string Name { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         [StringLength(100)]
         public string Username { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         [StringLength(15)]
         public string PhoneNumber { get; set; }
+
+        [Required(AllowEmptyStrings = false)]
+        [StringLength(3)]
+        public string Status { get; set; }
     }
 }

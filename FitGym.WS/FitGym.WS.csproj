@@ -245,6 +245,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Dtos\GymCompanyDto.cs" />
+    <Compile Include="Dtos\SuscriptionDto.cs" />
+    <Compile Include="Dtos\SuscriptionTypeDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
