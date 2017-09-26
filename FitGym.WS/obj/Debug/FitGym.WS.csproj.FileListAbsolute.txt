@@ -111,3 +111,5 @@ c:\users\usuario\documents\visual studio 2015\Projects\FitGym\FitGym.WS\bin\es\S
 c:\users\usuario\documents\visual studio 2015\Projects\FitGym\FitGym.WS\obj\Debug\FitGym.WS.csprojResolveAssemblyReference.cache
 c:\users\usuario\documents\visual studio 2015\Projects\FitGym\FitGym.WS\obj\Debug\FitGym.WS.dll
 c:\users\usuario\documents\visual studio 2015\Projects\FitGym\FitGym.WS\obj\Debug\FitGym.WS.pdb
+C:\Users\Usuario\documents\visual studio 2015\Projects\FitGym\FitGym.WS\bin\AutoMapper.dll
+C:\Users\Usuario\documents\visual studio 2015\Projects\FitGym\FitGym.WS\bin\AutoMapper.xml

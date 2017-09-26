@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using AutoMapper;
+using FitGym.WS.Dtos;
 using FitGym.WS.Models;
 
 namespace FitGym.WS.Controllers.FitGymApi
@@ -18,39 +20,43 @@ namespace FitGym.WS.Controllers.FitGymApi
         }
 
         // GET /fitgymapi/gymcompanies
-        public IEnumerable<GymCompany> GetGymCompanies()
+        public IEnumerable<GymCompanyDto> GetGymCompanies()
         {
-            return _context.GymCompany.ToList();
+            return _context.GymCompany.ToList().Select(Mapper.Map<GymCompany, GymCompanyDto>);
         }
 
         // GET /fitgymapi/gymcompanies/{id}
-        public GymCompany GetGymCompany(int id)
+        public GymCompanyDto GetGymCompany(int id)
         {
             var gymCompany = _context.GymCompany.SingleOrDefault(c => c.GymCompanyId == id);
 
             if(gymCompany == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            return gymCompany;
+            return Mapper.Map<GymCompany, GymCompanyDto>(gymCompany);
         }
 
 
         // POST /fitgymapi/gymcompanies
         [HttpPost]
-        public GymCompany CreateGymCompany(GymCompany gymCompany)
+        public GymCompanyDto CreateGymCompany(GymCompanyDto gymCompanyDto)
         {
             if (!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
 
+
+            var gymCompany = Mapper.Map<GymCompanyDto, GymCompany>(gymCompanyDto);
             _context.GymCompany.Add(gymCompany);
             _context.SaveChanges();
 
-            return gymCompany;
+            gymCompanyDto.GymCompanyId = gymCompany.GymCompanyId;
+
+            return gymCompanyDto;
         }
 
         // PUT /fitgymapi/gymcompanies/{id}
         [HttpPut]
-        public void UpdateGymCompany(int id, GymCompany gymCompany)
+        public void UpdateGymCompany(int id, GymCompanyDto gymCompanyDto)
         {
             if(!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
@@ -60,10 +66,8 @@ namespace FitGym.WS.Controllers.FitGymApi
             if(gymCompanyInDb == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            gymCompanyInDb.Name = gymCompany.Name;
-            gymCompanyInDb.PhoneNumber = gymCompany.PhoneNumber;
-            gymCompanyInDb.Password = gymCompany.Password;
-
+            Mapper.Map(gymCompanyDto, gymCompanyInDb);
+            
             _context.SaveChanges();
         }
 

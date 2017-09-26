@@ -8,7 +8,7 @@ namespace FitGym.WS.Dtos
 {
     public class GymCompanyDto
     {
-        public int Id { get; set; }
+        public int GymCompanyId { get; set; }
 
         [Required]
         [StringLength(100)]

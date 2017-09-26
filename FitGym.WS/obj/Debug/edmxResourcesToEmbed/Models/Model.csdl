@@ -13,6 +13,7 @@
     <NavigationProperty Name="Establishment" Relationship="Self.FK_Activity_Establishment" FromRole="Activity" ToRole="Establishment" />
     <NavigationProperty Name="ActivityDetail" Relationship="Self.FK_ActivityDetail_Activity" FromRole="Activity" ToRole="ActivityDetail" />
     <NavigationProperty Name="Evaluation" Relationship="Self.FK_Evaluation_Activity" FromRole="Activity" ToRole="Evaluation" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityType Name="ActivityDetail">
     <Key>
@@ -32,6 +33,9 @@
     <Property Name="ActivityTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Description" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="ActivityDetail" Relationship="Self.FK_ActivityDetail_ActivityType" FromRole="ActivityType" ToRole="ActivityDetail" />
+    <Property Name="GymCompanyId" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="GymCompany" Relationship="FitGymModel.FK_ActivityType_GymCompany" FromRole="ActivityType" ToRole="GymCompany" />
   </EntityType>
   <EntityType Name="BodyMeasurements">
     <Key>
@@ -67,6 +71,7 @@
     <NavigationProperty Name="BodyMeasurements" Relationship="Self.FK_BodyMeasurements_Client" FromRole="Client" ToRole="BodyMeasurements" />
     <NavigationProperty Name="PersonalTrainer" Relationship="Self.FK_Client_PersonalTrainer" FromRole="Client" ToRole="PersonalTrainer" />
     <NavigationProperty Name="Goal" Relationship="Self.FK_Goal_Client" FromRole="Client" ToRole="Goal" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityType Name="Diet">
     <Key>
@@ -88,6 +93,7 @@
     <Property Name="LocationY" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
     <NavigationProperty Name="Activity" Relationship="Self.FK_Activity_Establishment" FromRole="Establishment" ToRole="Activity" />
     <NavigationProperty Name="GymCompany" Relationship="Self.FK_Establishment_GymCompany" FromRole="Establishment" ToRole="GymCompany" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityType Name="Evaluation">
     <Key>
@@ -134,6 +140,7 @@
     <Property Name="Weight" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
     <Property Name="ClientId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Client" Relationship="Self.FK_Goal_Client" FromRole="Goal" ToRole="Client" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityType Name="GymCompany">
     <Key>
@@ -147,6 +154,8 @@
     <NavigationProperty Name="Establishment" Relationship="Self.FK_Establishment_GymCompany" FromRole="GymCompany" ToRole="Establishment" />
     <NavigationProperty Name="PersonalTrainer" Relationship="Self.FK_PersonalTrainer_GymCompany" FromRole="GymCompany" ToRole="PersonalTrainer" />
     <NavigationProperty Name="Suscription" Relationship="Self.FK_Suscription_GymCompany" FromRole="GymCompany" ToRole="Suscription" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="ActivityType" Relationship="FitGymModel.FK_ActivityType_GymCompany" FromRole="GymCompany" ToRole="ActivityType" />
   </EntityType>
   <EntityType Name="PersonalTrainer">
     <Key>
@@ -162,6 +171,7 @@
     <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Client" Relationship="Self.FK_Client_PersonalTrainer" FromRole="PersonalTrainer" ToRole="Client" />
     <NavigationProperty Name="GymCompany" Relationship="Self.FK_PersonalTrainer_GymCompany" FromRole="PersonalTrainer" ToRole="GymCompany" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityType Name="QuantityMeasurement">
     <Key>
@@ -182,6 +192,7 @@
     <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="GymCompany" Relationship="Self.FK_Suscription_GymCompany" FromRole="Suscription" ToRole="GymCompany" />
     <NavigationProperty Name="SuscriptionType" Relationship="Self.FK_Suscription_SuscriptionType" FromRole="Suscription" ToRole="SuscriptionType" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityType Name="SuscriptionType">
     <Key>
@@ -194,6 +205,7 @@
     <Property Name="QClients" Type="Int32" Nullable="false" />
     <Property Name="QEstablishments" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Suscription" Relationship="Self.FK_Suscription_SuscriptionType" FromRole="SuscriptionType" ToRole="Suscription" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityType Name="TypeMeal">
     <Key>
@@ -492,5 +504,21 @@
       <End Role="SuscriptionType" EntitySet="SuscriptionType" />
       <End Role="Suscription" EntitySet="Suscription" />
     </AssociationSet>
+    <AssociationSet Name="FK_ActivityType_GymCompany" Association="FitGymModel.FK_ActivityType_GymCompany">
+      <End Role="GymCompany" EntitySet="GymCompany" />
+      <End Role="ActivityType" EntitySet="ActivityType" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK_ActivityType_GymCompany">
+    <End Type="FitGymModel.GymCompany" Role="GymCompany" Multiplicity="1" />
+    <End Type="FitGymModel.ActivityType" Role="ActivityType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GymCompany">
+        <PropertyRef Name="GymCompanyId" />
+      </Principal>
+      <Dependent Role="ActivityType">
+        <PropertyRef Name="GymCompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

@@ -8,6 +8,7 @@
     <Property Name="ClientId" Type="int" Nullable="false" />
     <Property Name="StartTime" Type="datetime" Nullable="false" />
     <Property Name="EndTime" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="nchar" MaxLength="3" Nullable="false" />
     <Property Name="EstablishmentId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ActivityDetail">
@@ -24,6 +25,8 @@
       <PropertyRef Name="ActivityTypeId" />
     </Key>
     <Property Name="ActivityTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GymCompanyId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="nchar" MaxLength="3" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="80" Nullable="false" />
   </EntityType>
   <EntityType Name="BodyMeasurements">
@@ -51,6 +54,7 @@
     <Property Name="Username" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Address" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Status" Type="nchar" MaxLength="3" Nullable="false" />
     <Property Name="Height" Type="decimal" Precision="4" Scale="2" Nullable="false" />
     <Property Name="BirthDate" Type="date" Nullable="false" />
     <Property Name="PersonalTrainerId" Type="int" Nullable="false" />
@@ -68,6 +72,7 @@
     </Key>
     <Property Name="EstablishmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Status" Type="nchar" MaxLength="3" Nullable="false" />
     <Property Name="GymCompanyId" Type="int" Nullable="false" />
     <Property Name="LocationX" Type="decimal" Precision="18" Scale="6" Nullable="false" />
     <Property Name="LocationY" Type="decimal" Precision="18" Scale="6" Nullable="false" />
@@ -109,6 +114,7 @@
     <Property Name="Back" Type="decimal" Precision="4" Scale="2" Nullable="false" />
     <Property Name="Chest" Type="decimal" Precision="4" Scale="2" Nullable="false" />
     <Property Name="Weight" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+    <Property Name="Status" Type="nchar" MaxLength="3" Nullable="false" />
     <Property Name="ClientId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="GymCompany">
@@ -119,6 +125,7 @@
     <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Username" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Status" Type="nchar" MaxLength="3" Nullable="false" />
     <Property Name="PhoneNumber" Type="varchar" MaxLength="15" Nullable="false" />
   </EntityType>
   <EntityType Name="PersonalTrainer">
@@ -132,6 +139,7 @@
     <Property Name="Username" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="PhoneNumber" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Status" Type="nchar" MaxLength="3" Nullable="false" />
     <Property Name="Address" Type="varchar" MaxLength="200" Nullable="false" />
   </EntityType>
   <EntityType Name="QuantityMeasurement">
@@ -149,6 +157,7 @@
     <Property Name="SuscriptionTypeId" Type="int" Nullable="false" />
     <Property Name="GymCompanyId" Type="int" Nullable="false" />
     <Property Name="QMonths" Type="int" Nullable="false" />
+    <Property Name="Status" Type="nchar" MaxLength="3" Nullable="false" />
     <Property Name="StartDate" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="SuscriptionType">
@@ -160,6 +169,7 @@
     <Property Name="Price" Type="decimal" Precision="8" Scale="2" Nullable="false" />
     <Property Name="QPTrainers" Type="int" Nullable="false" />
     <Property Name="QClients" Type="int" Nullable="false" />
+    <Property Name="Status" Type="nchar" MaxLength="3" Nullable="false" />
     <Property Name="QEstablishments" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TypeMeal">
@@ -214,6 +224,18 @@
       </Principal>
       <Dependent Role="ActivityDetail">
         <PropertyRef Name="ActivityTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActivityType_GymCompany">
+    <End Role="GymCompany" Type="Self.GymCompany" Multiplicity="1" />
+    <End Role="ActivityType" Type="Self.ActivityType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GymCompany">
+        <PropertyRef Name="GymCompanyId" />
+      </Principal>
+      <Dependent Role="ActivityType">
+        <PropertyRef Name="GymCompanyId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -405,6 +427,10 @@
     <AssociationSet Name="FK_ActivityDetail_ActivityType" Association="Self.FK_ActivityDetail_ActivityType">
       <End Role="ActivityType" EntitySet="ActivityType" />
       <End Role="ActivityDetail" EntitySet="ActivityDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActivityType_GymCompany" Association="Self.FK_ActivityType_GymCompany">
+      <End Role="GymCompany" EntitySet="GymCompany" />
+      <End Role="ActivityType" EntitySet="ActivityType" />
     </AssociationSet>
     <AssociationSet Name="FK_BodyMeasurements_Client" Association="Self.FK_BodyMeasurements_Client">
       <End Role="Client" EntitySet="Client" />

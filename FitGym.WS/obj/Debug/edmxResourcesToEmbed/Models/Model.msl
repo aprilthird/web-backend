@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Activity">
       <EntityTypeMapping TypeName="FitGymModel.Activity">
         <MappingFragment StoreEntitySet="Activity">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
           <ScalarProperty Name="ClientId" ColumnName="ClientId" />
           <ScalarProperty Name="StartTime" ColumnName="StartTime" />
@@ -25,6 +26,8 @@
     <EntitySetMapping Name="ActivityType">
       <EntityTypeMapping TypeName="FitGymModel.ActivityType">
         <MappingFragment StoreEntitySet="ActivityType">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="GymCompanyId" ColumnName="GymCompanyId" />
           <ScalarProperty Name="ActivityTypeId" ColumnName="ActivityTypeId" />
           <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
@@ -48,6 +51,7 @@
     <EntitySetMapping Name="Client">
       <EntityTypeMapping TypeName="FitGymModel.Client">
         <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="ClientId" ColumnName="ClientId" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -72,6 +76,7 @@
     <EntitySetMapping Name="Establishment">
       <EntityTypeMapping TypeName="FitGymModel.Establishment">
         <MappingFragment StoreEntitySet="Establishment">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="EstablishmentId" ColumnName="EstablishmentId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="GymCompanyId" ColumnName="GymCompanyId" />
@@ -108,6 +113,7 @@
     <EntitySetMapping Name="Goal">
       <EntityTypeMapping TypeName="FitGymModel.Goal">
         <MappingFragment StoreEntitySet="Goal">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="GoalId" ColumnName="GoalId" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="StartDate" ColumnName="StartDate" />
@@ -125,6 +131,7 @@
     <EntitySetMapping Name="GymCompany">
       <EntityTypeMapping TypeName="FitGymModel.GymCompany">
         <MappingFragment StoreEntitySet="GymCompany">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="GymCompanyId" ColumnName="GymCompanyId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Username" ColumnName="Username" />
@@ -136,6 +143,7 @@
     <EntitySetMapping Name="PersonalTrainer">
       <EntityTypeMapping TypeName="FitGymModel.PersonalTrainer">
         <MappingFragment StoreEntitySet="PersonalTrainer">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="PersonalTrainerId" ColumnName="PersonalTrainerId" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -158,6 +166,7 @@
     <EntitySetMapping Name="Suscription">
       <EntityTypeMapping TypeName="FitGymModel.Suscription">
         <MappingFragment StoreEntitySet="Suscription">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="SuscriptionId" ColumnName="SuscriptionId" />
           <ScalarProperty Name="SuscriptionTypeId" ColumnName="SuscriptionTypeId" />
           <ScalarProperty Name="GymCompanyId" ColumnName="GymCompanyId" />
@@ -169,6 +178,7 @@
     <EntitySetMapping Name="SuscriptionType">
       <EntityTypeMapping TypeName="FitGymModel.SuscriptionType">
         <MappingFragment StoreEntitySet="SuscriptionType">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="SuscriptionTypeId" ColumnName="SuscriptionTypeId" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Price" ColumnName="Price" />
