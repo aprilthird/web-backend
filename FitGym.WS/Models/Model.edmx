@@ -1,0 +1,1242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FitGymModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+          </Key>
+          <Property Name="ActivityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="EstablishmentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActivityDetail">
+          <Key>
+            <PropertyRef Name="ActivityDetailId" />
+          </Key>
+          <Property Name="ActivityDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActivityId" Type="int" Nullable="false" />
+          <Property Name="QRepetition" Type="int" Nullable="false" />
+          <Property Name="ActivityTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActivityType">
+          <Key>
+            <PropertyRef Name="ActivityTypeId" />
+          </Key>
+          <Property Name="ActivityTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GymCompanyId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="80" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BodyMeasurements">
+          <Key>
+            <PropertyRef Name="BodyMeasurementsId" />
+          </Key>
+          <Property Name="BodyMeasurementsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Arms" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Legs" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Abs" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Back" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Chest" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Weight" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="EvaluationId" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ClientId" />
+          </Key>
+          <Property Name="ClientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Status" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="Height" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="BirthDate" Type="date" Nullable="false" />
+          <Property Name="PersonalTrainerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Diet">
+          <Key>
+            <PropertyRef Name="DietId" />
+          </Key>
+          <Property Name="DietId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TotalCalories" Type="decimal" Precision="8" Scale="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Establishment">
+          <Key>
+            <PropertyRef Name="EstablishmentId" />
+          </Key>
+          <Property Name="EstablishmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Status" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="GymCompanyId" Type="int" Nullable="false" />
+          <Property Name="LocationX" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="LocationY" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Evaluation">
+          <Key>
+            <PropertyRef Name="EvaluationId" />
+          </Key>
+          <Property Name="EvaluationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActivityId" Type="int" Nullable="false" />
+          <Property Name="DietId" Type="int" Nullable="false" />
+          <Property Name="CurrentDate" Type="datetime" Nullable="false" />
+          <Property Name="Comments" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Food">
+          <Key>
+            <PropertyRef Name="FoodId" />
+          </Key>
+          <Property Name="FoodId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DietId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TypeMealId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="QuantityMeasurementId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="100" />
+          <Property Name="Calories" Type="decimal" Precision="8" Scale="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Goal">
+          <Key>
+            <PropertyRef Name="GoalId" />
+          </Key>
+          <Property Name="GoalId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="120" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="Arms" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Legs" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Abs" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Back" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Chest" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Weight" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Status" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GymCompany">
+          <Key>
+            <PropertyRef Name="GymCompanyId" />
+          </Key>
+          <Property Name="GymCompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Status" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonalTrainer">
+          <Key>
+            <PropertyRef Name="PersonalTrainerId" />
+          </Key>
+          <Property Name="PersonalTrainerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="120" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="120" Nullable="false" />
+          <Property Name="GymCompanyId" Type="int" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Status" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuantityMeasurement">
+          <Key>
+            <PropertyRef Name="QuantityMeasurementId" />
+          </Key>
+          <Property Name="QuantityMeasurementId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Suscription">
+          <Key>
+            <PropertyRef Name="SuscriptionId" />
+          </Key>
+          <Property Name="SuscriptionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SuscriptionTypeId" Type="int" Nullable="false" />
+          <Property Name="GymCompanyId" Type="int" Nullable="false" />
+          <Property Name="QMonths" Type="int" Nullable="false" />
+          <Property Name="Status" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SuscriptionType">
+          <Key>
+            <PropertyRef Name="SuscriptionTypeId" />
+          </Key>
+          <Property Name="SuscriptionTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="QPTrainers" Type="int" Nullable="false" />
+          <Property Name="QClients" Type="int" Nullable="false" />
+          <Property Name="Status" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="QEstablishments" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeMeal">
+          <Key>
+            <PropertyRef Name="TypeMealId" />
+          </Key>
+          <Property Name="TypeMealId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Activity_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="Activity">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Activity_Establishment">
+          <End Role="Establishment" Type="Self.Establishment" Multiplicity="1" />
+          <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Establishment">
+              <PropertyRef Name="EstablishmentId" />
+            </Principal>
+            <Dependent Role="Activity">
+              <PropertyRef Name="EstablishmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityDetail_Activity">
+          <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
+          <End Role="ActivityDetail" Type="Self.ActivityDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="ActivityId" />
+            </Principal>
+            <Dependent Role="ActivityDetail">
+              <PropertyRef Name="ActivityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityDetail_ActivityType">
+          <End Role="ActivityType" Type="Self.ActivityType" Multiplicity="1" />
+          <End Role="ActivityDetail" Type="Self.ActivityDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActivityType">
+              <PropertyRef Name="ActivityTypeId" />
+            </Principal>
+            <Dependent Role="ActivityDetail">
+              <PropertyRef Name="ActivityTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityType_GymCompany">
+          <End Role="GymCompany" Type="Self.GymCompany" Multiplicity="1" />
+          <End Role="ActivityType" Type="Self.ActivityType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GymCompany">
+              <PropertyRef Name="GymCompanyId" />
+            </Principal>
+            <Dependent Role="ActivityType">
+              <PropertyRef Name="GymCompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BodyMeasurements_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="BodyMeasurements" Type="Self.BodyMeasurements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="BodyMeasurements">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BodyMeasurements_Evaluation">
+          <End Role="Evaluation" Type="Self.Evaluation" Multiplicity="1" />
+          <End Role="BodyMeasurements" Type="Self.BodyMeasurements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evaluation">
+              <PropertyRef Name="EvaluationId" />
+            </Principal>
+            <Dependent Role="BodyMeasurements">
+              <PropertyRef Name="EvaluationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_PersonalTrainer">
+          <End Role="PersonalTrainer" Type="Self.PersonalTrainer" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonalTrainer">
+              <PropertyRef Name="PersonalTrainerId" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="PersonalTrainerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Establishment_GymCompany">
+          <End Role="GymCompany" Type="Self.GymCompany" Multiplicity="1" />
+          <End Role="Establishment" Type="Self.Establishment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GymCompany">
+              <PropertyRef Name="GymCompanyId" />
+            </Principal>
+            <Dependent Role="Establishment">
+              <PropertyRef Name="GymCompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evaluation_Activity">
+          <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
+          <End Role="Evaluation" Type="Self.Evaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="ActivityId" />
+            </Principal>
+            <Dependent Role="Evaluation">
+              <PropertyRef Name="ActivityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evaluation_Diet">
+          <End Role="Diet" Type="Self.Diet" Multiplicity="1" />
+          <End Role="Evaluation" Type="Self.Evaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diet">
+              <PropertyRef Name="DietId" />
+            </Principal>
+            <Dependent Role="Evaluation">
+              <PropertyRef Name="DietId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Food_Diet">
+          <End Role="Diet" Type="Self.Diet" Multiplicity="1" />
+          <End Role="Food" Type="Self.Food" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diet">
+              <PropertyRef Name="DietId" />
+            </Principal>
+            <Dependent Role="Food">
+              <PropertyRef Name="DietId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Food_QuantityMeasurement">
+          <End Role="QuantityMeasurement" Type="Self.QuantityMeasurement" Multiplicity="1" />
+          <End Role="Food" Type="Self.Food" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuantityMeasurement">
+              <PropertyRef Name="QuantityMeasurementId" />
+            </Principal>
+            <Dependent Role="Food">
+              <PropertyRef Name="QuantityMeasurementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Food_TypeMeal">
+          <End Role="TypeMeal" Type="Self.TypeMeal" Multiplicity="1" />
+          <End Role="Food" Type="Self.Food" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeMeal">
+              <PropertyRef Name="TypeMealId" />
+            </Principal>
+            <Dependent Role="Food">
+              <PropertyRef Name="TypeMealId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Goal_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Goal" Type="Self.Goal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="Goal">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonalTrainer_GymCompany">
+          <End Role="GymCompany" Type="Self.GymCompany" Multiplicity="1" />
+          <End Role="PersonalTrainer" Type="Self.PersonalTrainer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GymCompany">
+              <PropertyRef Name="GymCompanyId" />
+            </Principal>
+            <Dependent Role="PersonalTrainer">
+              <PropertyRef Name="GymCompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Suscription_GymCompany">
+          <End Role="GymCompany" Type="Self.GymCompany" Multiplicity="1" />
+          <End Role="Suscription" Type="Self.Suscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GymCompany">
+              <PropertyRef Name="GymCompanyId" />
+            </Principal>
+            <Dependent Role="Suscription">
+              <PropertyRef Name="GymCompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Suscription_SuscriptionType">
+          <End Role="SuscriptionType" Type="Self.SuscriptionType" Multiplicity="1" />
+          <End Role="Suscription" Type="Self.Suscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SuscriptionType">
+              <PropertyRef Name="SuscriptionTypeId" />
+            </Principal>
+            <Dependent Role="Suscription">
+              <PropertyRef Name="SuscriptionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FitGymModelStoreContainer">
+          <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActivityDetail" EntityType="Self.ActivityDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActivityType" EntityType="Self.ActivityType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BodyMeasurements" EntityType="Self.BodyMeasurements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Diet" EntityType="Self.Diet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Establishment" EntityType="Self.Establishment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Evaluation" EntityType="Self.Evaluation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Food" EntityType="Self.Food" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Goal" EntityType="Self.Goal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GymCompany" EntityType="Self.GymCompany" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonalTrainer" EntityType="Self.PersonalTrainer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuantityMeasurement" EntityType="Self.QuantityMeasurement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Suscription" EntityType="Self.Suscription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuscriptionType" EntityType="Self.SuscriptionType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeMeal" EntityType="Self.TypeMeal" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Activity_Client" Association="Self.FK_Activity_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Activity" EntitySet="Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Activity_Establishment" Association="Self.FK_Activity_Establishment">
+            <End Role="Establishment" EntitySet="Establishment" />
+            <End Role="Activity" EntitySet="Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityDetail_Activity" Association="Self.FK_ActivityDetail_Activity">
+            <End Role="Activity" EntitySet="Activity" />
+            <End Role="ActivityDetail" EntitySet="ActivityDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityDetail_ActivityType" Association="Self.FK_ActivityDetail_ActivityType">
+            <End Role="ActivityType" EntitySet="ActivityType" />
+            <End Role="ActivityDetail" EntitySet="ActivityDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityType_GymCompany" Association="Self.FK_ActivityType_GymCompany">
+            <End Role="GymCompany" EntitySet="GymCompany" />
+            <End Role="ActivityType" EntitySet="ActivityType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BodyMeasurements_Client" Association="Self.FK_BodyMeasurements_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="BodyMeasurements" EntitySet="BodyMeasurements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BodyMeasurements_Evaluation" Association="Self.FK_BodyMeasurements_Evaluation">
+            <End Role="Evaluation" EntitySet="Evaluation" />
+            <End Role="BodyMeasurements" EntitySet="BodyMeasurements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_PersonalTrainer" Association="Self.FK_Client_PersonalTrainer">
+            <End Role="PersonalTrainer" EntitySet="PersonalTrainer" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Establishment_GymCompany" Association="Self.FK_Establishment_GymCompany">
+            <End Role="GymCompany" EntitySet="GymCompany" />
+            <End Role="Establishment" EntitySet="Establishment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evaluation_Activity" Association="Self.FK_Evaluation_Activity">
+            <End Role="Activity" EntitySet="Activity" />
+            <End Role="Evaluation" EntitySet="Evaluation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evaluation_Diet" Association="Self.FK_Evaluation_Diet">
+            <End Role="Diet" EntitySet="Diet" />
+            <End Role="Evaluation" EntitySet="Evaluation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Food_Diet" Association="Self.FK_Food_Diet">
+            <End Role="Diet" EntitySet="Diet" />
+            <End Role="Food" EntitySet="Food" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Food_QuantityMeasurement" Association="Self.FK_Food_QuantityMeasurement">
+            <End Role="QuantityMeasurement" EntitySet="QuantityMeasurement" />
+            <End Role="Food" EntitySet="Food" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Food_TypeMeal" Association="Self.FK_Food_TypeMeal">
+            <End Role="TypeMeal" EntitySet="TypeMeal" />
+            <End Role="Food" EntitySet="Food" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Goal_Client" Association="Self.FK_Goal_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Goal" EntitySet="Goal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonalTrainer_GymCompany" Association="Self.FK_PersonalTrainer_GymCompany">
+            <End Role="GymCompany" EntitySet="GymCompany" />
+            <End Role="PersonalTrainer" EntitySet="PersonalTrainer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Suscription_GymCompany" Association="Self.FK_Suscription_GymCompany">
+            <End Role="GymCompany" EntitySet="GymCompany" />
+            <End Role="Suscription" EntitySet="Suscription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Suscription_SuscriptionType" Association="Self.FK_Suscription_SuscriptionType">
+            <End Role="SuscriptionType" EntitySet="SuscriptionType" />
+            <End Role="Suscription" EntitySet="Suscription" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FitGymModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+          </Key>
+          <Property Name="ActivityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EstablishmentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Activity_Client" FromRole="Activity" ToRole="Client" />
+          <NavigationProperty Name="Establishment" Relationship="Self.FK_Activity_Establishment" FromRole="Activity" ToRole="Establishment" />
+          <NavigationProperty Name="ActivityDetail" Relationship="Self.FK_ActivityDetail_Activity" FromRole="Activity" ToRole="ActivityDetail" />
+          <NavigationProperty Name="Evaluation" Relationship="Self.FK_Evaluation_Activity" FromRole="Activity" ToRole="Evaluation" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ActivityDetail">
+          <Key>
+            <PropertyRef Name="ActivityDetailId" />
+          </Key>
+          <Property Name="ActivityDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActivityId" Type="Int32" Nullable="false" />
+          <Property Name="QRepetition" Type="Int32" Nullable="false" />
+          <Property Name="ActivityTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Activity" Relationship="Self.FK_ActivityDetail_Activity" FromRole="ActivityDetail" ToRole="Activity" />
+          <NavigationProperty Name="ActivityType" Relationship="Self.FK_ActivityDetail_ActivityType" FromRole="ActivityDetail" ToRole="ActivityType" />
+        </EntityType>
+        <EntityType Name="ActivityType">
+          <Key>
+            <PropertyRef Name="ActivityTypeId" />
+          </Key>
+          <Property Name="ActivityTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ActivityDetail" Relationship="Self.FK_ActivityDetail_ActivityType" FromRole="ActivityType" ToRole="ActivityDetail" />
+          <Property Name="GymCompanyId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="GymCompany" Relationship="FitGymModel.FK_ActivityType_GymCompany" FromRole="ActivityType" ToRole="GymCompany" />
+        </EntityType>
+        <EntityType Name="BodyMeasurements">
+          <Key>
+            <PropertyRef Name="BodyMeasurementsId" />
+          </Key>
+          <Property Name="BodyMeasurementsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Arms" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Legs" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Abs" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Back" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Chest" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Weight" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="EvaluationId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_BodyMeasurements_Client" FromRole="BodyMeasurements" ToRole="Client" />
+          <NavigationProperty Name="Evaluation" Relationship="Self.FK_BodyMeasurements_Evaluation" FromRole="BodyMeasurements" ToRole="Evaluation" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ClientId" />
+          </Key>
+          <Property Name="ClientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Height" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PersonalTrainerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Activity" Relationship="Self.FK_Activity_Client" FromRole="Client" ToRole="Activity" />
+          <NavigationProperty Name="BodyMeasurements" Relationship="Self.FK_BodyMeasurements_Client" FromRole="Client" ToRole="BodyMeasurements" />
+          <NavigationProperty Name="PersonalTrainer" Relationship="Self.FK_Client_PersonalTrainer" FromRole="Client" ToRole="PersonalTrainer" />
+          <NavigationProperty Name="Goal" Relationship="Self.FK_Goal_Client" FromRole="Client" ToRole="Goal" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Diet">
+          <Key>
+            <PropertyRef Name="DietId" />
+          </Key>
+          <Property Name="DietId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TotalCalories" Type="Decimal" Precision="8" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Evaluation" Relationship="Self.FK_Evaluation_Diet" FromRole="Diet" ToRole="Evaluation" />
+          <NavigationProperty Name="Food" Relationship="Self.FK_Food_Diet" FromRole="Diet" ToRole="Food" />
+        </EntityType>
+        <EntityType Name="Establishment">
+          <Key>
+            <PropertyRef Name="EstablishmentId" />
+          </Key>
+          <Property Name="EstablishmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GymCompanyId" Type="Int32" Nullable="false" />
+          <Property Name="LocationX" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="LocationY" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <NavigationProperty Name="Activity" Relationship="Self.FK_Activity_Establishment" FromRole="Establishment" ToRole="Activity" />
+          <NavigationProperty Name="GymCompany" Relationship="Self.FK_Establishment_GymCompany" FromRole="Establishment" ToRole="GymCompany" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Evaluation">
+          <Key>
+            <PropertyRef Name="EvaluationId" />
+          </Key>
+          <Property Name="EvaluationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActivityId" Type="Int32" Nullable="false" />
+          <Property Name="DietId" Type="Int32" Nullable="false" />
+          <Property Name="CurrentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Comments" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Activity" Relationship="Self.FK_Evaluation_Activity" FromRole="Evaluation" ToRole="Activity" />
+          <NavigationProperty Name="BodyMeasurements" Relationship="Self.FK_BodyMeasurements_Evaluation" FromRole="Evaluation" ToRole="BodyMeasurements" />
+          <NavigationProperty Name="Diet" Relationship="Self.FK_Evaluation_Diet" FromRole="Evaluation" ToRole="Diet" />
+        </EntityType>
+        <EntityType Name="Food">
+          <Key>
+            <PropertyRef Name="FoodId" />
+          </Key>
+          <Property Name="FoodId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DietId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TypeMealId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="QuantityMeasurementId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Calories" Type="Decimal" Precision="8" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Diet" Relationship="Self.FK_Food_Diet" FromRole="Food" ToRole="Diet" />
+          <NavigationProperty Name="QuantityMeasurement" Relationship="Self.FK_Food_QuantityMeasurement" FromRole="Food" ToRole="QuantityMeasurement" />
+          <NavigationProperty Name="TypeMeal" Relationship="Self.FK_Food_TypeMeal" FromRole="Food" ToRole="TypeMeal" />
+        </EntityType>
+        <EntityType Name="Goal">
+          <Key>
+            <PropertyRef Name="GoalId" />
+          </Key>
+          <Property Name="GoalId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Arms" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Legs" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Abs" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Back" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Chest" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="Weight" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Goal_Client" FromRole="Goal" ToRole="Client" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="GymCompany">
+          <Key>
+            <PropertyRef Name="GymCompanyId" />
+          </Key>
+          <Property Name="GymCompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Establishment" Relationship="Self.FK_Establishment_GymCompany" FromRole="GymCompany" ToRole="Establishment" />
+          <NavigationProperty Name="PersonalTrainer" Relationship="Self.FK_PersonalTrainer_GymCompany" FromRole="GymCompany" ToRole="PersonalTrainer" />
+          <NavigationProperty Name="Suscription" Relationship="Self.FK_Suscription_GymCompany" FromRole="GymCompany" ToRole="Suscription" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="ActivityType" Relationship="FitGymModel.FK_ActivityType_GymCompany" FromRole="GymCompany" ToRole="ActivityType" />
+        </EntityType>
+        <EntityType Name="PersonalTrainer">
+          <Key>
+            <PropertyRef Name="PersonalTrainerId" />
+          </Key>
+          <Property Name="PersonalTrainerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="120" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="120" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GymCompanyId" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Client_PersonalTrainer" FromRole="PersonalTrainer" ToRole="Client" />
+          <NavigationProperty Name="GymCompany" Relationship="Self.FK_PersonalTrainer_GymCompany" FromRole="PersonalTrainer" ToRole="GymCompany" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="QuantityMeasurement">
+          <Key>
+            <PropertyRef Name="QuantityMeasurementId" />
+          </Key>
+          <Property Name="QuantityMeasurementId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Food" Relationship="Self.FK_Food_QuantityMeasurement" FromRole="QuantityMeasurement" ToRole="Food" />
+        </EntityType>
+        <EntityType Name="Suscription">
+          <Key>
+            <PropertyRef Name="SuscriptionId" />
+          </Key>
+          <Property Name="SuscriptionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SuscriptionTypeId" Type="Int32" Nullable="false" />
+          <Property Name="GymCompanyId" Type="Int32" Nullable="false" />
+          <Property Name="QMonths" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="GymCompany" Relationship="Self.FK_Suscription_GymCompany" FromRole="Suscription" ToRole="GymCompany" />
+          <NavigationProperty Name="SuscriptionType" Relationship="Self.FK_Suscription_SuscriptionType" FromRole="Suscription" ToRole="SuscriptionType" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SuscriptionType">
+          <Key>
+            <PropertyRef Name="SuscriptionTypeId" />
+          </Key>
+          <Property Name="SuscriptionTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="QPTrainers" Type="Int32" Nullable="false" />
+          <Property Name="QClients" Type="Int32" Nullable="false" />
+          <Property Name="QEstablishments" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Suscription" Relationship="Self.FK_Suscription_SuscriptionType" FromRole="SuscriptionType" ToRole="Suscription" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TypeMeal">
+          <Key>
+            <PropertyRef Name="TypeMealId" />
+          </Key>
+          <Property Name="TypeMealId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Food" Relationship="Self.FK_Food_TypeMeal" FromRole="TypeMeal" ToRole="Food" />
+        </EntityType>
+        <Association Name="FK_Activity_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="Activity">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Activity_Establishment">
+          <End Role="Establishment" Type="Self.Establishment" Multiplicity="1" />
+          <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Establishment">
+              <PropertyRef Name="EstablishmentId" />
+            </Principal>
+            <Dependent Role="Activity">
+              <PropertyRef Name="EstablishmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityDetail_Activity">
+          <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
+          <End Role="ActivityDetail" Type="Self.ActivityDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="ActivityId" />
+            </Principal>
+            <Dependent Role="ActivityDetail">
+              <PropertyRef Name="ActivityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evaluation_Activity">
+          <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
+          <End Role="Evaluation" Type="Self.Evaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activity">
+              <PropertyRef Name="ActivityId" />
+            </Principal>
+            <Dependent Role="Evaluation">
+              <PropertyRef Name="ActivityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityDetail_ActivityType">
+          <End Role="ActivityType" Type="Self.ActivityType" Multiplicity="1" />
+          <End Role="ActivityDetail" Type="Self.ActivityDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActivityType">
+              <PropertyRef Name="ActivityTypeId" />
+            </Principal>
+            <Dependent Role="ActivityDetail">
+              <PropertyRef Name="ActivityTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BodyMeasurements_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="BodyMeasurements" Type="Self.BodyMeasurements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="BodyMeasurements">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BodyMeasurements_Evaluation">
+          <End Role="Evaluation" Type="Self.Evaluation" Multiplicity="1" />
+          <End Role="BodyMeasurements" Type="Self.BodyMeasurements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Evaluation">
+              <PropertyRef Name="EvaluationId" />
+            </Principal>
+            <Dependent Role="BodyMeasurements">
+              <PropertyRef Name="EvaluationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_PersonalTrainer">
+          <End Role="PersonalTrainer" Type="Self.PersonalTrainer" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonalTrainer">
+              <PropertyRef Name="PersonalTrainerId" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="PersonalTrainerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Goal_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Goal" Type="Self.Goal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="Goal">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evaluation_Diet">
+          <End Role="Diet" Type="Self.Diet" Multiplicity="1" />
+          <End Role="Evaluation" Type="Self.Evaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diet">
+              <PropertyRef Name="DietId" />
+            </Principal>
+            <Dependent Role="Evaluation">
+              <PropertyRef Name="DietId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Food_Diet">
+          <End Role="Diet" Type="Self.Diet" Multiplicity="1" />
+          <End Role="Food" Type="Self.Food" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diet">
+              <PropertyRef Name="DietId" />
+            </Principal>
+            <Dependent Role="Food">
+              <PropertyRef Name="DietId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Establishment_GymCompany">
+          <End Role="GymCompany" Type="Self.GymCompany" Multiplicity="1" />
+          <End Role="Establishment" Type="Self.Establishment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GymCompany">
+              <PropertyRef Name="GymCompanyId" />
+            </Principal>
+            <Dependent Role="Establishment">
+              <PropertyRef Name="GymCompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Food_QuantityMeasurement">
+          <End Role="QuantityMeasurement" Type="Self.QuantityMeasurement" Multiplicity="1" />
+          <End Role="Food" Type="Self.Food" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuantityMeasurement">
+              <PropertyRef Name="QuantityMeasurementId" />
+            </Principal>
+            <Dependent Role="Food">
+              <PropertyRef Name="QuantityMeasurementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Food_TypeMeal">
+          <End Role="TypeMeal" Type="Self.TypeMeal" Multiplicity="1" />
+          <End Role="Food" Type="Self.Food" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeMeal">
+              <PropertyRef Name="TypeMealId" />
+            </Principal>
+            <Dependent Role="Food">
+              <PropertyRef Name="TypeMealId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonalTrainer_GymCompany">
+          <End Role="GymCompany" Type="Self.GymCompany" Multiplicity="1" />
+          <End Role="PersonalTrainer" Type="Self.PersonalTrainer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GymCompany">
+              <PropertyRef Name="GymCompanyId" />
+            </Principal>
+            <Dependent Role="PersonalTrainer">
+              <PropertyRef Name="GymCompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Suscription_GymCompany">
+          <End Role="GymCompany" Type="Self.GymCompany" Multiplicity="1" />
+          <End Role="Suscription" Type="Self.Suscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GymCompany">
+              <PropertyRef Name="GymCompanyId" />
+            </Principal>
+            <Dependent Role="Suscription">
+              <PropertyRef Name="GymCompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Suscription_SuscriptionType">
+          <End Role="SuscriptionType" Type="Self.SuscriptionType" Multiplicity="1" />
+          <End Role="Suscription" Type="Self.Suscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SuscriptionType">
+              <PropertyRef Name="SuscriptionTypeId" />
+            </Principal>
+            <Dependent Role="Suscription">
+              <PropertyRef Name="SuscriptionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FitGymEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Activity" EntityType="Self.Activity" />
+          <EntitySet Name="ActivityDetail" EntityType="Self.ActivityDetail" />
+          <EntitySet Name="ActivityType" EntityType="Self.ActivityType" />
+          <EntitySet Name="BodyMeasurements" EntityType="Self.BodyMeasurements" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Diet" EntityType="Self.Diet" />
+          <EntitySet Name="Establishment" EntityType="Self.Establishment" />
+          <EntitySet Name="Evaluation" EntityType="Self.Evaluation" />
+          <EntitySet Name="Food" EntityType="Self.Food" />
+          <EntitySet Name="Goal" EntityType="Self.Goal" />
+          <EntitySet Name="GymCompany" EntityType="Self.GymCompany" />
+          <EntitySet Name="PersonalTrainer" EntityType="Self.PersonalTrainer" />
+          <EntitySet Name="QuantityMeasurement" EntityType="Self.QuantityMeasurement" />
+          <EntitySet Name="Suscription" EntityType="Self.Suscription" />
+          <EntitySet Name="SuscriptionType" EntityType="Self.SuscriptionType" />
+          <EntitySet Name="TypeMeal" EntityType="Self.TypeMeal" />
+          <AssociationSet Name="FK_Activity_Client" Association="Self.FK_Activity_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Activity" EntitySet="Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Activity_Establishment" Association="Self.FK_Activity_Establishment">
+            <End Role="Establishment" EntitySet="Establishment" />
+            <End Role="Activity" EntitySet="Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityDetail_Activity" Association="Self.FK_ActivityDetail_Activity">
+            <End Role="Activity" EntitySet="Activity" />
+            <End Role="ActivityDetail" EntitySet="ActivityDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evaluation_Activity" Association="Self.FK_Evaluation_Activity">
+            <End Role="Activity" EntitySet="Activity" />
+            <End Role="Evaluation" EntitySet="Evaluation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityDetail_ActivityType" Association="Self.FK_ActivityDetail_ActivityType">
+            <End Role="ActivityType" EntitySet="ActivityType" />
+            <End Role="ActivityDetail" EntitySet="ActivityDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BodyMeasurements_Client" Association="Self.FK_BodyMeasurements_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="BodyMeasurements" EntitySet="BodyMeasurements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BodyMeasurements_Evaluation" Association="Self.FK_BodyMeasurements_Evaluation">
+            <End Role="Evaluation" EntitySet="Evaluation" />
+            <End Role="BodyMeasurements" EntitySet="BodyMeasurements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_PersonalTrainer" Association="Self.FK_Client_PersonalTrainer">
+            <End Role="PersonalTrainer" EntitySet="PersonalTrainer" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Goal_Client" Association="Self.FK_Goal_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Goal" EntitySet="Goal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evaluation_Diet" Association="Self.FK_Evaluation_Diet">
+            <End Role="Diet" EntitySet="Diet" />
+            <End Role="Evaluation" EntitySet="Evaluation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Food_Diet" Association="Self.FK_Food_Diet">
+            <End Role="Diet" EntitySet="Diet" />
+            <End Role="Food" EntitySet="Food" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Establishment_GymCompany" Association="Self.FK_Establishment_GymCompany">
+            <End Role="GymCompany" EntitySet="GymCompany" />
+            <End Role="Establishment" EntitySet="Establishment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Food_QuantityMeasurement" Association="Self.FK_Food_QuantityMeasurement">
+            <End Role="QuantityMeasurement" EntitySet="QuantityMeasurement" />
+            <End Role="Food" EntitySet="Food" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Food_TypeMeal" Association="Self.FK_Food_TypeMeal">
+            <End Role="TypeMeal" EntitySet="TypeMeal" />
+            <End Role="Food" EntitySet="Food" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonalTrainer_GymCompany" Association="Self.FK_PersonalTrainer_GymCompany">
+            <End Role="GymCompany" EntitySet="GymCompany" />
+            <End Role="PersonalTrainer" EntitySet="PersonalTrainer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Suscription_GymCompany" Association="Self.FK_Suscription_GymCompany">
+            <End Role="GymCompany" EntitySet="GymCompany" />
+            <End Role="Suscription" EntitySet="Suscription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Suscription_SuscriptionType" Association="Self.FK_Suscription_SuscriptionType">
+            <End Role="SuscriptionType" EntitySet="SuscriptionType" />
+            <End Role="Suscription" EntitySet="Suscription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityType_GymCompany" Association="FitGymModel.FK_ActivityType_GymCompany">
+            <End Role="GymCompany" EntitySet="GymCompany" />
+            <End Role="ActivityType" EntitySet="ActivityType" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_ActivityType_GymCompany">
+          <End Type="FitGymModel.GymCompany" Role="GymCompany" Multiplicity="1" />
+          <End Type="FitGymModel.ActivityType" Role="ActivityType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GymCompany">
+              <PropertyRef Name="GymCompanyId" />
+            </Principal>
+            <Dependent Role="ActivityType">
+              <PropertyRef Name="GymCompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FitGymModelStoreContainer" CdmEntityContainer="FitGymEntities">
+          <EntitySetMapping Name="Activity">
+            <EntityTypeMapping TypeName="FitGymModel.Activity">
+              <MappingFragment StoreEntitySet="Activity">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="EstablishmentId" ColumnName="EstablishmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActivityDetail">
+            <EntityTypeMapping TypeName="FitGymModel.ActivityDetail">
+              <MappingFragment StoreEntitySet="ActivityDetail">
+                <ScalarProperty Name="ActivityDetailId" ColumnName="ActivityDetailId" />
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+                <ScalarProperty Name="QRepetition" ColumnName="QRepetition" />
+                <ScalarProperty Name="ActivityTypeId" ColumnName="ActivityTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActivityType">
+            <EntityTypeMapping TypeName="FitGymModel.ActivityType">
+              <MappingFragment StoreEntitySet="ActivityType">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="GymCompanyId" ColumnName="GymCompanyId" />
+                <ScalarProperty Name="ActivityTypeId" ColumnName="ActivityTypeId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BodyMeasurements">
+            <EntityTypeMapping TypeName="FitGymModel.BodyMeasurements">
+              <MappingFragment StoreEntitySet="BodyMeasurements">
+                <ScalarProperty Name="BodyMeasurementsId" ColumnName="BodyMeasurementsId" />
+                <ScalarProperty Name="Arms" ColumnName="Arms" />
+                <ScalarProperty Name="Legs" ColumnName="Legs" />
+                <ScalarProperty Name="Abs" ColumnName="Abs" />
+                <ScalarProperty Name="Back" ColumnName="Back" />
+                <ScalarProperty Name="Chest" ColumnName="Chest" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="EvaluationId" ColumnName="EvaluationId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="FitGymModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="PersonalTrainerId" ColumnName="PersonalTrainerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Diet">
+            <EntityTypeMapping TypeName="FitGymModel.Diet">
+              <MappingFragment StoreEntitySet="Diet">
+                <ScalarProperty Name="DietId" ColumnName="DietId" />
+                <ScalarProperty Name="TotalCalories" ColumnName="TotalCalories" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Establishment">
+            <EntityTypeMapping TypeName="FitGymModel.Establishment">
+              <MappingFragment StoreEntitySet="Establishment">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EstablishmentId" ColumnName="EstablishmentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GymCompanyId" ColumnName="GymCompanyId" />
+                <ScalarProperty Name="LocationX" ColumnName="LocationX" />
+                <ScalarProperty Name="LocationY" ColumnName="LocationY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Evaluation">
+            <EntityTypeMapping TypeName="FitGymModel.Evaluation">
+              <MappingFragment StoreEntitySet="Evaluation">
+                <ScalarProperty Name="EvaluationId" ColumnName="EvaluationId" />
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+                <ScalarProperty Name="DietId" ColumnName="DietId" />
+                <ScalarProperty Name="CurrentDate" ColumnName="CurrentDate" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Food">
+            <EntityTypeMapping TypeName="FitGymModel.Food">
+              <MappingFragment StoreEntitySet="Food">
+                <ScalarProperty Name="FoodId" ColumnName="FoodId" />
+                <ScalarProperty Name="DietId" ColumnName="DietId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TypeMealId" ColumnName="TypeMealId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="QuantityMeasurementId" ColumnName="QuantityMeasurementId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Calories" ColumnName="Calories" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Goal">
+            <EntityTypeMapping TypeName="FitGymModel.Goal">
+              <MappingFragment StoreEntitySet="Goal">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="GoalId" ColumnName="GoalId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Arms" ColumnName="Arms" />
+                <ScalarProperty Name="Legs" ColumnName="Legs" />
+                <ScalarProperty Name="Abs" ColumnName="Abs" />
+                <ScalarProperty Name="Back" ColumnName="Back" />
+                <ScalarProperty Name="Chest" ColumnName="Chest" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GymCompany">
+            <EntityTypeMapping TypeName="FitGymModel.GymCompany">
+              <MappingFragment StoreEntitySet="GymCompany">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="GymCompanyId" ColumnName="GymCompanyId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonalTrainer">
+            <EntityTypeMapping TypeName="FitGymModel.PersonalTrainer">
+              <MappingFragment StoreEntitySet="PersonalTrainer">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PersonalTrainerId" ColumnName="PersonalTrainerId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="GymCompanyId" ColumnName="GymCompanyId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuantityMeasurement">
+            <EntityTypeMapping TypeName="FitGymModel.QuantityMeasurement">
+              <MappingFragment StoreEntitySet="QuantityMeasurement">
+                <ScalarProperty Name="QuantityMeasurementId" ColumnName="QuantityMeasurementId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suscription">
+            <EntityTypeMapping TypeName="FitGymModel.Suscription">
+              <MappingFragment StoreEntitySet="Suscription">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SuscriptionId" ColumnName="SuscriptionId" />
+                <ScalarProperty Name="SuscriptionTypeId" ColumnName="SuscriptionTypeId" />
+                <ScalarProperty Name="GymCompanyId" ColumnName="GymCompanyId" />
+                <ScalarProperty Name="QMonths" ColumnName="QMonths" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuscriptionType">
+            <EntityTypeMapping TypeName="FitGymModel.SuscriptionType">
+              <MappingFragment StoreEntitySet="SuscriptionType">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SuscriptionTypeId" ColumnName="SuscriptionTypeId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="QPTrainers" ColumnName="QPTrainers" />
+                <ScalarProperty Name="QClients" ColumnName="QClients" />
+                <ScalarProperty Name="QEstablishments" ColumnName="QEstablishments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeMeal">
+            <EntityTypeMapping TypeName="FitGymModel.TypeMeal">
+              <MappingFragment StoreEntitySet="TypeMeal">
+                <ScalarProperty Name="TypeMealId" ColumnName="TypeMealId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

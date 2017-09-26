@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8701682370114e20859d881ae9dfc945" Name="Diagram1">
+        <EntityTypeShape EntityType="FitGymModel.Activity" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitGymModel.ActivityDetail" Width="1.5" PointX="9.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitGymModel.ActivityType" Width="1.5" PointX="7.5" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitGymModel.BodyMeasurements" Width="1.5" PointX="15" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitGymModel.Client" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitGymModel.Diet" Width="1.5" PointX="10.5" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitGymModel.Establishment" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitGymModel.Evaluation" Width="1.5" PointX="12.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitGymModel.Food" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitGymModel.Goal" Width="1.5" PointX="7.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitGymModel.GymCompany" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitGymModel.PersonalTrainer" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitGymModel.QuantityMeasurement" Width="1.5" PointX="10.5" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitGymModel.Suscription" Width="1.5" PointX="3" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitGymModel.SuscriptionType" Width="1.5" PointX="0.75" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitGymModel.TypeMeal" Width="1.5" PointX="10.5" PointY="11" IsExpanded="true" />
+        <AssociationConnector Association="FitGymModel.FK_Activity_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="FitGymModel.FK_Activity_Establishment" ManuallyRouted="false" />
+        <AssociationConnector Association="FitGymModel.FK_ActivityDetail_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="FitGymModel.FK_Evaluation_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="FitGymModel.FK_ActivityDetail_ActivityType" ManuallyRouted="false" />
+        <AssociationConnector Association="FitGymModel.FK_BodyMeasurements_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="FitGymModel.FK_BodyMeasurements_Evaluation" ManuallyRouted="false" />
+        <AssociationConnector Association="FitGymModel.FK_Client_PersonalTrainer" ManuallyRouted="false" />
+        <AssociationConnector Association="FitGymModel.FK_Goal_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="FitGymModel.FK_Evaluation_Diet" ManuallyRouted="false" />
+        <AssociationConnector Association="FitGymModel.FK_Food_Diet" ManuallyRouted="false" />
+        <AssociationConnector Association="FitGymModel.FK_Establishment_GymCompany" ManuallyRouted="false" />
+        <AssociationConnector Association="FitGymModel.FK_Food_QuantityMeasurement" ManuallyRouted="false" />
+        <AssociationConnector Association="FitGymModel.FK_Food_TypeMeal" ManuallyRouted="false" />
+        <AssociationConnector Association="FitGymModel.FK_PersonalTrainer_GymCompany" ManuallyRouted="false" />
+        <AssociationConnector Association="FitGymModel.FK_Suscription_GymCompany" ManuallyRouted="false" />
+        <AssociationConnector Association="FitGymModel.FK_Suscription_SuscriptionType" ManuallyRouted="false" />
+        <AssociationConnector Association="FitGymModel.FK_ActivityType_GymCompany" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
