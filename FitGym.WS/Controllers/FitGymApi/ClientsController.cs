@@ -11,20 +11,19 @@ using FitGym.WS.Models;
 
 namespace FitGym.WS.Controllers.FitGymApi
 {
-    public class PersonalTrainersController : ApiController
+    public class ClientsController : ApiController
     {
         private FitGymEntities _context;
-        private string EntityName = "Personal Trainer";
+        private string EntityName = "Client";
 
-        public PersonalTrainersController()
+        public ClientsController()
         {
             _context = new FitGymEntities();
         }
 
-
         // GET /fitgymapi/personaltrainers
         [HttpGet]
-        public IHttpActionResult GetPersonalTrainers(int? gymCompanyId = null)
+        public IHttpActionResult GetClients(int? personalTrainerId = null)
         {
             dynamic Response = new ExpandoObject();
 
@@ -32,12 +31,12 @@ namespace FitGym.WS.Controllers.FitGymApi
             {
                 Response.Status = ConstantValues.ResponseStatus.OK;
 
-                var personalTrainers = _context.PersonalTrainer.ToList();
+                var clients = _context.Client.ToList();
 
-                if (gymCompanyId.HasValue)
-                    personalTrainers = personalTrainers.Where(p => p.GymCompanyId == gymCompanyId.Value).ToList();
+                if (personalTrainerId.HasValue)
+                    clients = clients.Where(c => c.PersonalTrainerId == personalTrainerId.Value).ToList();
 
-                Response.PersonalTrainers = personalTrainers.Select(Mapper.Map<PersonalTrainer, PersonalTrainerDto>);
+                Response.Client = clients.Select(Mapper.Map<Client, ClientDto>);
                 return Ok(Response);
             }
             catch (Exception e)
@@ -50,15 +49,15 @@ namespace FitGym.WS.Controllers.FitGymApi
 
         // GET /fitgymapi/personaltrainers/{id}
         [HttpGet]
-        public IHttpActionResult GetPersonalTrainer(int id)
+        public IHttpActionResult GetClient(int id)
         {
             dynamic Response = new ExpandoObject();
 
             try
             {
-                PersonalTrainer personalTrainer = _context.PersonalTrainer.SingleOrDefault(p => p.PersonalTrainerId == id);
+                Client client = _context.Client.SingleOrDefault(c => c.ClientId == id);
 
-                if (personalTrainer == null)
+                if (client == null)
                 {
                     Response.Status = ConstantValues.ResponseStatus.ERROR;
                     Response.Message = string.Format(ConstantValues.ErrorMessage.NOT_FOUND, EntityName, id);
@@ -66,7 +65,7 @@ namespace FitGym.WS.Controllers.FitGymApi
                 }
 
                 Response.Status = ConstantValues.ResponseStatus.OK;
-                Response.PersonalTrainer = Mapper.Map<PersonalTrainer, PersonalTrainerDto>(personalTrainer);
+                Response.PersonalTrainer = Mapper.Map<Client, ClientDto>(client);
                 return Ok(Response);
             }
             catch (Exception e)
@@ -80,7 +79,7 @@ namespace FitGym.WS.Controllers.FitGymApi
 
         // POST /fitgymapi/gymcompanies
         [HttpPost]
-        public IHttpActionResult CreatePersonalTrainer(PersonalTrainerDto personalTrainerDto)
+        public IHttpActionResult CreateClient (ClientDto clientDto)
         {
             dynamic Response = new ExpandoObject();
 
@@ -93,16 +92,16 @@ namespace FitGym.WS.Controllers.FitGymApi
                     return Content(HttpStatusCode.BadRequest, Response);
                 }
 
-                var personalTrainer = Mapper.Map<PersonalTrainerDto, PersonalTrainer>(personalTrainerDto);
-                _context.PersonalTrainer.Add(personalTrainer);
+                var client = Mapper.Map<ClientDto, Client>(clientDto);
+                _context.Client.Add(client);
                 _context.SaveChanges();
 
-                personalTrainerDto.PersonalTrainerId = personalTrainer.PersonalTrainerId;
+                clientDto.ClientId = client.ClientId;
 
                 Response.Status = ConstantValues.ResponseStatus.OK;
-                Response.PersonalTrainer = personalTrainerDto;
+                Response.Client = clientDto;
 
-                return Created(new Uri(Request.RequestUri + "/" + personalTrainer.PersonalTrainerId), Response);
+                return Created(new Uri(Request.RequestUri + "/" + client.ClientId), Response);
             }
             catch (Exception e)
             {
@@ -114,7 +113,7 @@ namespace FitGym.WS.Controllers.FitGymApi
 
         // PUT /fitgymapi/gymcompanies/{id}
         [HttpPut]
-        public IHttpActionResult UpdatePersonalTrainer(int id, PersonalTrainerDto personalTrainerDto)
+        public IHttpActionResult UpdateClient(int id, ClientDto clientDto)
         {
             dynamic Response = new ExpandoObject();
 
@@ -127,21 +126,21 @@ namespace FitGym.WS.Controllers.FitGymApi
                     return Content(HttpStatusCode.BadRequest, Response);
                 }
 
-                var personalTrainerInDb = _context.PersonalTrainer.SingleOrDefault(p => p.PersonalTrainerId == id);
+                var clientInDb = _context.Client.SingleOrDefault(c => c.ClientId == id);
 
-                if (personalTrainerInDb == null)
+                if (clientInDb == null)
                 {
                     Response.Status = ConstantValues.ResponseStatus.ERROR;
                     Response.Message = string.Format(ConstantValues.ErrorMessage.NOT_FOUND, EntityName, id);
                     return Content(HttpStatusCode.NotFound, Response);
                 }
 
-                Mapper.Map(personalTrainerDto, personalTrainerInDb);
+                Mapper.Map(clientDto, clientInDb);
                 _context.SaveChanges();
 
-                personalTrainerDto.PersonalTrainerId = id;
+                clientDto.ClientId = id;
                 Response.Status = ConstantValues.ResponseStatus.OK;
-                Response.PersonalTrainer = personalTrainerDto;
+                Response.Client = clientDto;
                 return Ok(Response);
             }
             catch (Exception e)
@@ -154,22 +153,22 @@ namespace FitGym.WS.Controllers.FitGymApi
 
         // DELETE /fitgymapi/gymcompanies/{id}
         [HttpDelete]
-        public IHttpActionResult DeletePersonalTrainer(int id)
+        public IHttpActionResult DeleteClient(int id)
         {
             dynamic Response = new ExpandoObject();
 
             try
             {
-                var personalTrainer = _context.PersonalTrainer.SingleOrDefault(p => p.PersonalTrainerId == id);
+                var client = _context.Client.SingleOrDefault(c => c.ClientId == id);
 
-                if (personalTrainer == null)
+                if (client == null)
                 {
                     Response.Status = ConstantValues.ResponseStatus.ERROR;
                     Response.Message = string.Format(ConstantValues.ErrorMessage.NOT_FOUND, EntityName, id);
                     return Content(HttpStatusCode.NotFound, Response);
                 }
 
-                personalTrainer.Status = ConstantValues.EntityStatus.INACTIVE;
+                client.Status = ConstantValues.EntityStatus.INACTIVE;
                 _context.SaveChanges();
 
                 Response.Status = ConstantValues.ResponseStatus.OK;
