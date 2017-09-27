@@ -242,10 +242,16 @@
     <Compile Include="ConstantValues\ConstantValues.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FitGymApi\GymCompaniesController.cs" />
-    <Compile Include="Controllers\FitGymApi\HttpActionResult.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Dtos\ActivityDetailDto.cs" />
+    <Compile Include="Dtos\ActivityDto.cs" />
+    <Compile Include="Dtos\ActivityTypeDto.cs" />
+    <Compile Include="Dtos\ClientDto.cs" />
+    <Compile Include="Dtos\DietDto.cs" />
+    <Compile Include="Dtos\EstablishmentDto.cs" />
     <Compile Include="Dtos\GymCompanyDto.cs" />
+    <Compile Include="Dtos\PersonalTrainerDto.cs" />
     <Compile Include="Dtos\SuscriptionDto.cs" />
     <Compile Include="Dtos\SuscriptionTypeDto.cs" />
     <Compile Include="Global.asax.cs">
