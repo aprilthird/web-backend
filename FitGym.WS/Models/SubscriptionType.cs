@@ -12,23 +12,23 @@ namespace FitGym.WS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class SuscriptionType
+    public partial class SubscriptionType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SuscriptionType()
+        public SubscriptionType()
         {
-            this.Suscription = new HashSet<Suscription>();
+            this.Subscription = new HashSet<Subscription>();
         }
     
-        public int SuscriptionTypeId { get; set; }
+        public int SubscriptionTypeId { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
         public int QPTrainers { get; set; }
         public int QClients { get; set; }
-        public int QEstablishments { get; set; }
         public string Status { get; set; }
+        public int QEstablishments { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Suscription> Suscription { get; set; }
+        public virtual ICollection<Subscription> Subscription { get; set; }
     }
 }

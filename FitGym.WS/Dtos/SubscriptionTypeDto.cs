@@ -6,9 +6,9 @@ using System.Web;
 
 namespace FitGym.WS.Dtos
 {
-    public class SuscriptionTypeDto
+    public class SubscriptionTypeDto
     {
-        public int SuscriptionTypeId { get; set; }
+        public int SubscriptionTypeId { get; set; }
 
         [Required(AllowEmptyStrings = false)]
         [StringLength(50)]

@@ -25,8 +25,8 @@ namespace FitGym.WS.Models
         public int ClientId { get; set; }
         public System.DateTime StartTime { get; set; }
         public System.DateTime EndTime { get; set; }
-        public int EstablishmentId { get; set; }
         public string Status { get; set; }
+        public int EstablishmentId { get; set; }
     
         public virtual Client Client { get; set; }
         public virtual Establishment Establishment { get; set; }

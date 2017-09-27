@@ -242,6 +242,9 @@
     <Compile Include="ConstantValues\ConstantValues.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FitGymApi\GymCompaniesController.cs" />
+    <Compile Include="Controllers\FitGymApi\PersonalTrainersController.cs" />
+    <Compile Include="Controllers\FitGymApi\SubscriptionsController.cs" />
+    <Compile Include="Controllers\FitGymApi\SubscriptionTypesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Dtos\ActivityDetailDto.cs" />
@@ -252,8 +255,8 @@
     <Compile Include="Dtos\EstablishmentDto.cs" />
     <Compile Include="Dtos\GymCompanyDto.cs" />
     <Compile Include="Dtos\PersonalTrainerDto.cs" />
-    <Compile Include="Dtos\SuscriptionDto.cs" />
-    <Compile Include="Dtos\SuscriptionTypeDto.cs" />
+    <Compile Include="Dtos\SubscriptionDto.cs" />
+    <Compile Include="Dtos\SubscriptionTypeDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -314,10 +317,10 @@
     <Compile Include="Models\QuantityMeasurement.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Suscription.cs">
+    <Compile Include="Models\Subscription.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SuscriptionType.cs">
+    <Compile Include="Models\SubscriptionType.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TypeMeal.cs">

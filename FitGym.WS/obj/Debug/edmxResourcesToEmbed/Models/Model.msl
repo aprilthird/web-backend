@@ -4,11 +4,11 @@
     <EntitySetMapping Name="Activity">
       <EntityTypeMapping TypeName="FitGymModel.Activity">
         <MappingFragment StoreEntitySet="Activity">
-          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
           <ScalarProperty Name="ClientId" ColumnName="ClientId" />
           <ScalarProperty Name="StartTime" ColumnName="StartTime" />
           <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="EstablishmentId" ColumnName="EstablishmentId" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -26,9 +26,9 @@
     <EntitySetMapping Name="ActivityType">
       <EntityTypeMapping TypeName="FitGymModel.ActivityType">
         <MappingFragment StoreEntitySet="ActivityType">
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="GymCompanyId" ColumnName="GymCompanyId" />
           <ScalarProperty Name="ActivityTypeId" ColumnName="ActivityTypeId" />
+          <ScalarProperty Name="GymCompanyId" ColumnName="GymCompanyId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -51,7 +51,6 @@
     <EntitySetMapping Name="Client">
       <EntityTypeMapping TypeName="FitGymModel.Client">
         <MappingFragment StoreEntitySet="Client">
-          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="ClientId" ColumnName="ClientId" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -59,6 +58,7 @@
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Height" ColumnName="Height" />
           <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
           <ScalarProperty Name="PersonalTrainerId" ColumnName="PersonalTrainerId" />
@@ -76,9 +76,9 @@
     <EntitySetMapping Name="Establishment">
       <EntityTypeMapping TypeName="FitGymModel.Establishment">
         <MappingFragment StoreEntitySet="Establishment">
-          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="EstablishmentId" ColumnName="EstablishmentId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="GymCompanyId" ColumnName="GymCompanyId" />
           <ScalarProperty Name="LocationX" ColumnName="LocationX" />
           <ScalarProperty Name="LocationY" ColumnName="LocationY" />
@@ -113,7 +113,6 @@
     <EntitySetMapping Name="Goal">
       <EntityTypeMapping TypeName="FitGymModel.Goal">
         <MappingFragment StoreEntitySet="Goal">
-          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="GoalId" ColumnName="GoalId" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="StartDate" ColumnName="StartDate" />
@@ -124,6 +123,7 @@
           <ScalarProperty Name="Back" ColumnName="Back" />
           <ScalarProperty Name="Chest" ColumnName="Chest" />
           <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="ClientId" ColumnName="ClientId" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -131,11 +131,11 @@
     <EntitySetMapping Name="GymCompany">
       <EntityTypeMapping TypeName="FitGymModel.GymCompany">
         <MappingFragment StoreEntitySet="GymCompany">
-          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="GymCompanyId" ColumnName="GymCompanyId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -143,7 +143,6 @@
     <EntitySetMapping Name="PersonalTrainer">
       <EntityTypeMapping TypeName="FitGymModel.PersonalTrainer">
         <MappingFragment StoreEntitySet="PersonalTrainer">
-          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="PersonalTrainerId" ColumnName="PersonalTrainerId" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -151,6 +150,7 @@
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Address" ColumnName="Address" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -163,27 +163,27 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Suscription">
-      <EntityTypeMapping TypeName="FitGymModel.Suscription">
-        <MappingFragment StoreEntitySet="Suscription">
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="SuscriptionId" ColumnName="SuscriptionId" />
-          <ScalarProperty Name="SuscriptionTypeId" ColumnName="SuscriptionTypeId" />
+    <EntitySetMapping Name="Subscription">
+      <EntityTypeMapping TypeName="FitGymModel.Subscription">
+        <MappingFragment StoreEntitySet="Subscription">
+          <ScalarProperty Name="SubscriptionId" ColumnName="SubscriptionId" />
+          <ScalarProperty Name="SubscriptionTypeId" ColumnName="SubscriptionTypeId" />
           <ScalarProperty Name="GymCompanyId" ColumnName="GymCompanyId" />
           <ScalarProperty Name="QMonths" ColumnName="QMonths" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="StartDate" ColumnName="StartDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="SuscriptionType">
-      <EntityTypeMapping TypeName="FitGymModel.SuscriptionType">
-        <MappingFragment StoreEntitySet="SuscriptionType">
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="SuscriptionTypeId" ColumnName="SuscriptionTypeId" />
+    <EntitySetMapping Name="SubscriptionType">
+      <EntityTypeMapping TypeName="FitGymModel.SubscriptionType">
+        <MappingFragment StoreEntitySet="SubscriptionType">
+          <ScalarProperty Name="SubscriptionTypeId" ColumnName="SubscriptionTypeId" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="QPTrainers" ColumnName="QPTrainers" />
           <ScalarProperty Name="QClients" ColumnName="QClients" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="QEstablishments" ColumnName="QEstablishments" />
         </MappingFragment>
       </EntityTypeMapping>

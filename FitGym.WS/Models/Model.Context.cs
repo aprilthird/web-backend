@@ -38,8 +38,8 @@ namespace FitGym.WS.Models
         public virtual DbSet<GymCompany> GymCompany { get; set; }
         public virtual DbSet<PersonalTrainer> PersonalTrainer { get; set; }
         public virtual DbSet<QuantityMeasurement> QuantityMeasurement { get; set; }
-        public virtual DbSet<Suscription> Suscription { get; set; }
-        public virtual DbSet<SuscriptionType> SuscriptionType { get; set; }
+        public virtual DbSet<Subscription> Subscription { get; set; }
+        public virtual DbSet<SubscriptionType> SubscriptionType { get; set; }
         public virtual DbSet<TypeMeal> TypeMeal { get; set; }
     }
 }

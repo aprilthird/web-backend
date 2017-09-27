@@ -22,10 +22,10 @@ namespace FitGym.WS.Models
     
         public int EstablishmentId { get; set; }
         public string Name { get; set; }
+        public string Status { get; set; }
         public int GymCompanyId { get; set; }
         public decimal LocationX { get; set; }
         public decimal LocationY { get; set; }
-        public string Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Activity> Activity { get; set; }

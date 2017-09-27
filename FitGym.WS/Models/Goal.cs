@@ -24,8 +24,8 @@ namespace FitGym.WS.Models
         public decimal Back { get; set; }
         public decimal Chest { get; set; }
         public decimal Weight { get; set; }
-        public int ClientId { get; set; }
         public string Status { get; set; }
+        public int ClientId { get; set; }
     
         public virtual Client Client { get; set; }
     }

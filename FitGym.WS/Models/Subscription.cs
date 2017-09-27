@@ -12,16 +12,16 @@ namespace FitGym.WS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Suscription
+    public partial class Subscription
     {
-        public int SuscriptionId { get; set; }
-        public int SuscriptionTypeId { get; set; }
+        public int SubscriptionId { get; set; }
+        public int SubscriptionTypeId { get; set; }
         public int GymCompanyId { get; set; }
         public int QMonths { get; set; }
-        public System.DateTime StartDate { get; set; }
         public string Status { get; set; }
+        public System.DateTime StartDate { get; set; }
     
         public virtual GymCompany GymCompany { get; set; }
-        public virtual SuscriptionType SuscriptionType { get; set; }
+        public virtual SubscriptionType SubscriptionType { get; set; }
     }
 }

@@ -149,22 +149,22 @@
     <Property Name="QuantityMeasurementId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="30" Nullable="false" />
   </EntityType>
-  <EntityType Name="Suscription">
+  <EntityType Name="Subscription">
     <Key>
-      <PropertyRef Name="SuscriptionId" />
+      <PropertyRef Name="SubscriptionId" />
     </Key>
-    <Property Name="SuscriptionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="SuscriptionTypeId" Type="int" Nullable="false" />
+    <Property Name="SubscriptionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubscriptionTypeId" Type="int" Nullable="false" />
     <Property Name="GymCompanyId" Type="int" Nullable="false" />
     <Property Name="QMonths" Type="int" Nullable="false" />
     <Property Name="Status" Type="nchar" MaxLength="3" Nullable="false" />
     <Property Name="StartDate" Type="datetime" Nullable="false" />
   </EntityType>
-  <EntityType Name="SuscriptionType">
+  <EntityType Name="SubscriptionType">
     <Key>
-      <PropertyRef Name="SuscriptionTypeId" />
+      <PropertyRef Name="SubscriptionTypeId" />
     </Key>
-    <Property Name="SuscriptionTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubscriptionTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Price" Type="decimal" Precision="8" Scale="2" Nullable="false" />
     <Property Name="QPTrainers" Type="int" Nullable="false" />
@@ -373,25 +373,25 @@
   </Association>
   <Association Name="FK_Suscription_GymCompany">
     <End Role="GymCompany" Type="Self.GymCompany" Multiplicity="1" />
-    <End Role="Suscription" Type="Self.Suscription" Multiplicity="*" />
+    <End Role="Subscription" Type="Self.Subscription" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="GymCompany">
         <PropertyRef Name="GymCompanyId" />
       </Principal>
-      <Dependent Role="Suscription">
+      <Dependent Role="Subscription">
         <PropertyRef Name="GymCompanyId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Suscription_SuscriptionType">
-    <End Role="SuscriptionType" Type="Self.SuscriptionType" Multiplicity="1" />
-    <End Role="Suscription" Type="Self.Suscription" Multiplicity="*" />
+    <End Role="SubscriptionType" Type="Self.SubscriptionType" Multiplicity="1" />
+    <End Role="Subscription" Type="Self.Subscription" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="SuscriptionType">
-        <PropertyRef Name="SuscriptionTypeId" />
+      <Principal Role="SubscriptionType">
+        <PropertyRef Name="SubscriptionTypeId" />
       </Principal>
-      <Dependent Role="Suscription">
-        <PropertyRef Name="SuscriptionTypeId" />
+      <Dependent Role="Subscription">
+        <PropertyRef Name="SubscriptionTypeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -409,8 +409,8 @@
     <EntitySet Name="GymCompany" EntityType="Self.GymCompany" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PersonalTrainer" EntityType="Self.PersonalTrainer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="QuantityMeasurement" EntityType="Self.QuantityMeasurement" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Suscription" EntityType="Self.Suscription" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="SuscriptionType" EntityType="Self.SuscriptionType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subscription" EntityType="Self.Subscription" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SubscriptionType" EntityType="Self.SubscriptionType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TypeMeal" EntityType="Self.TypeMeal" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Activity_Client" Association="Self.FK_Activity_Client">
       <End Role="Client" EntitySet="Client" />
@@ -478,11 +478,11 @@
     </AssociationSet>
     <AssociationSet Name="FK_Suscription_GymCompany" Association="Self.FK_Suscription_GymCompany">
       <End Role="GymCompany" EntitySet="GymCompany" />
-      <End Role="Suscription" EntitySet="Suscription" />
+      <End Role="Subscription" EntitySet="Subscription" />
     </AssociationSet>
     <AssociationSet Name="FK_Suscription_SuscriptionType" Association="Self.FK_Suscription_SuscriptionType">
-      <End Role="SuscriptionType" EntitySet="SuscriptionType" />
-      <End Role="Suscription" EntitySet="Suscription" />
+      <End Role="SubscriptionType" EntitySet="SubscriptionType" />
+      <End Role="Subscription" EntitySet="Subscription" />
     </AssociationSet>
   </EntityContainer>
 </Schema>
