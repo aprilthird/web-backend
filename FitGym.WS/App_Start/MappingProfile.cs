@@ -13,7 +13,7 @@ namespace FitGym.WS.App_Start
         public MappingProfile()
         {
             CreateMap<GymCompany, GymCompanyDto>();
-            CreateMap<GymCompanyDto, GymCompany>();
+            CreateMap<GymCompanyDto, GymCompany>().ForMember(m => m.GymCompanyId, opt => opt.Ignore());
         }
     }
 }

@@ -11,6 +11,7 @@ namespace FitGym.WS.Dtos
         public int SuscriptionId { get; set; }
 
         [Required]
+        [Range(1, Int32.MaxValue)]
         public int QMonths { get; set; }
 
         [Required(AllowEmptyStrings = false)]
@@ -18,12 +19,15 @@ namespace FitGym.WS.Dtos
         public string Status { get; set; }
 
         [Required]
+        [DataType(DataType.DateTime)]
         public DateTime StartDate { get; set; }
 
         [Required]
+        [Range(1, Int32.MaxValue)]
         public int SuscriptionTypeId { get; set; }
 
         [Required]
+        [Range(1, Int32.MaxValue)]
         public int GymCompanyId { get; set; }
     }
 }

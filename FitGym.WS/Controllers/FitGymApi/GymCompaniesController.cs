@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Results;
 using AutoMapper;
 using FitGym.WS.Dtos;
 using FitGym.WS.Models;
@@ -13,6 +15,7 @@ namespace FitGym.WS.Controllers.FitGymApi
     public class GymCompaniesController : ApiController
     {
         private FitGymEntities _context;
+        private string EntityName = "Gym Company";
 
         public GymCompaniesController()
         {
@@ -20,68 +23,156 @@ namespace FitGym.WS.Controllers.FitGymApi
         }
 
         // GET /fitgymapi/gymcompanies
-        public IEnumerable<GymCompanyDto> GetGymCompanies()
+        public IHttpActionResult GetGymCompanies()
         {
-            return _context.GymCompany.ToList().Select(Mapper.Map<GymCompany, GymCompanyDto>);
+            dynamic Response = new ExpandoObject();
+
+            try
+            {
+                Response.Status = ConstantValues.ResponseStatus.OK;
+                Response.GymCompanies = _context.GymCompany.ToList().Select(Mapper.Map<GymCompany, GymCompanyDto>);                
+                return Ok(Response);
+            }
+            catch (Exception e)
+            {
+                Response.Status = ConstantValues.ResponseStatus.ERROR;
+                Response.Message = ConstantValues.ErrorMessage.INTERNAL_SERVER_ERROR;
+                return Content(HttpStatusCode.InternalServerError, Response);
+            }
         }
 
         // GET /fitgymapi/gymcompanies/{id}
-        public GymCompanyDto GetGymCompany(int id)
+        public IHttpActionResult GetGymCompany(int id)
         {
-            var gymCompany = _context.GymCompany.SingleOrDefault(c => c.GymCompanyId == id);
+            dynamic Response = new ExpandoObject();
 
-            if(gymCompany == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+            try
+            {
+                GymCompany gymCompany = _context.GymCompany.SingleOrDefault(c => c.GymCompanyId == id);
 
-            return Mapper.Map<GymCompany, GymCompanyDto>(gymCompany);
+                if (gymCompany == null)
+                {
+                    Response.Status = ConstantValues.ResponseStatus.ERROR;
+                    Response.Message = string.Format(ConstantValues.ErrorMessage.NOT_FOUND, EntityName, id);
+                    return Content(HttpStatusCode.NotFound, Response);
+                }
+
+                Response.Status = ConstantValues.ResponseStatus.OK;
+                Response.GymCompany = Mapper.Map<GymCompany, GymCompanyDto>(gymCompany);
+                return Ok(Response);
+            }
+            catch (Exception e)
+            {
+                Response.Status = ConstantValues.ResponseStatus.ERROR;
+                Response.Message = ConstantValues.ErrorMessage.INTERNAL_SERVER_ERROR;
+                return Content(HttpStatusCode.InternalServerError, Response);
+            }
         }
 
 
         // POST /fitgymapi/gymcompanies
         [HttpPost]
-        public GymCompanyDto CreateGymCompany(GymCompanyDto gymCompanyDto)
+        public IHttpActionResult CreateGymCompany(GymCompanyDto gymCompanyDto)
         {
-            if (!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            dynamic Response = new ExpandoObject();
 
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    Response.Status = ConstantValues.ResponseStatus.ERROR;
+                    Response.Message = ConstantValues.ErrorMessage.BAD_REQUEST;
+                    return Content(HttpStatusCode.BadRequest, Response);
+                }
 
-            var gymCompany = Mapper.Map<GymCompanyDto, GymCompany>(gymCompanyDto);
-            _context.GymCompany.Add(gymCompany);
-            _context.SaveChanges();
+                var gymCompany = Mapper.Map<GymCompanyDto, GymCompany>(gymCompanyDto);
+                _context.GymCompany.Add(gymCompany);
+                _context.SaveChanges();
 
-            gymCompanyDto.GymCompanyId = gymCompany.GymCompanyId;
+                gymCompanyDto.GymCompanyId = gymCompany.GymCompanyId;
 
-            return gymCompanyDto;
+                Response.Status = ConstantValues.ResponseStatus.OK;
+                Response.GymCompany = gymCompanyDto;
+
+                return Created(new Uri(Request.RequestUri + "/" + gymCompany.GymCompanyId), Response);
+            }
+            catch (Exception e)
+            {
+                Response.Status = ConstantValues.ResponseStatus.ERROR;
+                Response.Message = ConstantValues.ErrorMessage.INTERNAL_SERVER_ERROR;
+                return Content(HttpStatusCode.InternalServerError, Response);
+            }
         }
 
         // PUT /fitgymapi/gymcompanies/{id}
         [HttpPut]
-        public void UpdateGymCompany(int id, GymCompanyDto gymCompanyDto)
+        public IHttpActionResult UpdateGymCompany(int id, GymCompanyDto gymCompanyDto)
         {
-            if(!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            dynamic Response = new ExpandoObject();
 
-            var gymCompanyInDb = _context.GymCompany.SingleOrDefault(g => g.GymCompanyId == id);
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    Response.Status = ConstantValues.ResponseStatus.ERROR;
+                    Response.Message = ConstantValues.ErrorMessage.BAD_REQUEST;
+                    return Content(HttpStatusCode.BadRequest, Response);
+                }
 
-            if(gymCompanyInDb == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                var gymCompanyInDb = _context.GymCompany.SingleOrDefault(g => g.GymCompanyId == id);
 
-            Mapper.Map(gymCompanyDto, gymCompanyInDb);
-            
-            _context.SaveChanges();
+                if (gymCompanyInDb == null)
+                {
+                    Response.Status = ConstantValues.ResponseStatus.ERROR;
+                    Response.Message = string.Format(ConstantValues.ErrorMessage.NOT_FOUND, EntityName, id);
+                    return Content(HttpStatusCode.NotFound, Response);
+                }
+
+                Mapper.Map(gymCompanyDto, gymCompanyInDb);
+                _context.SaveChanges();
+
+                gymCompanyDto.GymCompanyId = id;
+                Response.Status = ConstantValues.ResponseStatus.OK;
+                Response.GymCompany = gymCompanyDto;
+                return Ok(Response);
+            }
+            catch (Exception e)
+            {
+                Response.Status = ConstantValues.ResponseStatus.ERROR;
+                Response.Message = ConstantValues.ErrorMessage.INTERNAL_SERVER_ERROR;
+                return Content(HttpStatusCode.InternalServerError, Response);
+            }
         }
 
         // DELETE /fitgymapi/gymcompanies/{id}
         [HttpDelete]
-        public void DeleteGymCompany(int id)
+        public IHttpActionResult DeleteGymCompany(int id)
         {
-            var gymCompany = _context.GymCompany.SingleOrDefault(g => g.GymCompanyId == id);
+            dynamic Response = new ExpandoObject();
 
-            if(gymCompany == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+            try
+            {
+                var gymCompany = _context.GymCompany.SingleOrDefault(g => g.GymCompanyId == id);
 
-            gymCompany.Status = ConstantValues.Status.INACTIVE;
-            _context.SaveChanges();
+                if (gymCompany == null)
+                {
+                    Response.Status = ConstantValues.ResponseStatus.ERROR;
+                    Response.Message = string.Format(ConstantValues.ErrorMessage.NOT_FOUND, EntityName, id);
+                    return Content(HttpStatusCode.NotFound, Response);
+                }
+
+                gymCompany.Status = ConstantValues.EntityStatus.INACTIVE;
+                _context.SaveChanges();
+
+                Response.Status = ConstantValues.ResponseStatus.OK;
+                return Ok(Response);
+            }
+            catch (Exception e)
+            {
+                Response.Status = ConstantValues.ResponseStatus.ERROR;
+                Response.Message = ConstantValues.ErrorMessage.INTERNAL_SERVER_ERROR;
+                return Content(HttpStatusCode.InternalServerError, Response);
+            }
         }
     }
 }

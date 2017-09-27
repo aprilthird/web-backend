@@ -19,6 +19,10 @@ namespace FitGym.WS.Dtos
         public string Username { get; set; }
 
         [Required(AllowEmptyStrings = false)]
+        [StringLength(100)]
+        public string Password { get; set; }
+
+        [Required(AllowEmptyStrings = false)]
         [StringLength(15)]
         public string PhoneNumber { get; set; }
 
