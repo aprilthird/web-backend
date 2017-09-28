@@ -78,7 +78,7 @@ namespace FitGym.WS.Controllers.FitGymApi
         }
 
 
-        // POST /fitgymapi/gymcompanies
+        // POST /fitgymapi/personaltrainers
         [HttpPost]
         public IHttpActionResult CreatePersonalTrainer(PersonalTrainerDto personalTrainerDto)
         {
@@ -112,7 +112,7 @@ namespace FitGym.WS.Controllers.FitGymApi
             }
         }
 
-        // PUT /fitgymapi/gymcompanies/{id}
+        // PUT /fitgymapi/personaltrainers/{id}
         [HttpPut]
         public IHttpActionResult UpdatePersonalTrainer(int id, PersonalTrainerDto personalTrainerDto)
         {
@@ -152,7 +152,7 @@ namespace FitGym.WS.Controllers.FitGymApi
             }
         }
 
-        // DELETE /fitgymapi/gymcompanies/{id}
+        // DELETE /fitgymapi/personaltrainers/{id}
         [HttpDelete]
         public IHttpActionResult DeletePersonalTrainer(int id)
         {

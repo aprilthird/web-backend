@@ -21,7 +21,7 @@ namespace FitGym.WS.Controllers.FitGymApi
             _context = new FitGymEntities();
         }
 
-        // GET /fitgymapi/personaltrainers
+        // GET /fitgymapi/establishments
         [HttpGet]
         public IHttpActionResult GetEstablishments(int? gymCompanyId = null)
         {
@@ -47,7 +47,7 @@ namespace FitGym.WS.Controllers.FitGymApi
             }
         }
 
-        // GET /fitgymapi/personaltrainers/{id}
+        // GET /fitgymapi/establishments/{id}
         [HttpGet]
         public IHttpActionResult GetEstablishment(int id)
         {
@@ -77,7 +77,7 @@ namespace FitGym.WS.Controllers.FitGymApi
         }
 
 
-        // POST /fitgymapi/gymcompanies
+        // POST /fitgymapi/establishments
         [HttpPost]
         public IHttpActionResult CreateEstablishment(EstablishmentDto establishmentDto)
         {
@@ -111,7 +111,7 @@ namespace FitGym.WS.Controllers.FitGymApi
             }
         }
 
-        // PUT /fitgymapi/gymcompanies/{id}
+        // PUT /fitgymapi/establishments/{id}
         [HttpPut]
         public IHttpActionResult UpdateEstablishment(int id, EstablishmentDto establishmentDto)
         {
@@ -151,7 +151,7 @@ namespace FitGym.WS.Controllers.FitGymApi
             }
         }
 
-        // DELETE /fitgymapi/gymcompanies/{id}
+        // DELETE /fitgymapi/establishments/{id}
         [HttpDelete]
         public IHttpActionResult DeleteEstablishment(int id)
         {
