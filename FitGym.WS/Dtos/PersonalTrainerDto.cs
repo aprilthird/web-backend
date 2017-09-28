@@ -37,5 +37,9 @@ namespace FitGym.WS.Dtos
         [Required(AllowEmptyStrings = false)]
         [StringLength(200)]
         public string Address { get; set; }
+
+        [Required(AllowEmptyStrings = false)]
+        [StringLength(3)]
+        public string Status { get; set; }
     }
 }

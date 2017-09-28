@@ -97,7 +97,6 @@ namespace FitGym.WS.Controllers.FitGymApi
                 _context.SaveChanges();
 
                 activityDto.ActivityId = activity.ActivityId;
-
                 Response.Status = ConstantValues.ResponseStatus.OK;
                 Response.Activity = activityDto;
 

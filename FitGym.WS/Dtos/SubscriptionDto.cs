@@ -24,7 +24,7 @@ namespace FitGym.WS.Dtos
 
         [Required]
         [Range(1, Int32.MaxValue)]
-        public int SuscriptionTypeId { get; set; }
+        public int SubscriptionTypeId { get; set; }
 
         [Required]
         [Range(1, Int32.MaxValue)]

@@ -15,11 +15,11 @@ namespace FitGym.WS.Dtos
         public string Name { get; set; }
 
         [Required]
-        [Range(0, Double.MaxValue)]
+        [Range(Double.MinValue, Double.MaxValue)]
         public decimal LocationX { get; set; }
 
         [Required]
-        [Range(0, Double.MaxValue)]
+        [Range(Double.MinValue, Double.MaxValue)]
         public decimal LocationY { get; set; }
 
         [Required(AllowEmptyStrings = false)]

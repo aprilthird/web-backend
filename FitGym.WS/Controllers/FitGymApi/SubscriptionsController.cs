@@ -130,7 +130,7 @@ namespace FitGym.WS.Controllers.FitGymApi
                 Mapper.Map(subscriptionDto, subscriptionInDb);
                 _context.SaveChanges();
 
-                subscriptionDto.GymCompanyId = id;
+                subscriptionDto.SubscriptionId = id;
                 Response.Status = ConstantValues.ResponseStatus.OK;
                 Response.Subscription = subscriptionDto;
                 return Ok(Response);

@@ -34,7 +34,7 @@ namespace FitGym.WS
 
             config.Routes.MapHttpRoute(
                 name: "FitGymApi",
-                routeTemplate: "fitgymapi/{controller}/{id}",
+                routeTemplate: "fitgymapi/v1/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
         }

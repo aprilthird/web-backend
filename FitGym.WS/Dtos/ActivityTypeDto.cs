@@ -17,5 +17,9 @@ namespace FitGym.WS.Dtos
         [Required]
         [Range(1, Int32.MaxValue)]
         public int GymCompanyId { get; set; }
+
+        [Required(AllowEmptyStrings = false)]
+        [StringLength(3)]
+        public string Status { get; set; }
     }
 }

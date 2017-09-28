@@ -26,6 +26,10 @@ namespace FitGym.WS.App_Start
             CreateMap<EstablishmentDto, Establishment>().ForMember(m => m.EstablishmentId, opt => opt.Ignore());
             CreateMap<ActivityType, ActivityTypeDto>();
             CreateMap<ActivityTypeDto, ActivityType>().ForMember(m => m.ActivityTypeId, opt => opt.Ignore());
+            CreateMap<ActivityDetail, ActivityDetailDto>();
+            CreateMap<ActivityDetailDto, ActivityDetail>().ForMember(m => m.ActivityDetailId, opt => opt.Ignore());
+            CreateMap<Activity, ActivityDto>();
+            CreateMap<ActivityDto, Activity>().ForMember(m => m.ActivityId, opt => opt.Ignore());
         }
     }
 }

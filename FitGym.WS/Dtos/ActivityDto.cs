@@ -12,7 +12,7 @@ namespace FitGym.WS.Dtos
 
         [Required]
         [DataType(DataType.DateTime)]
-        public DateTime StarTime { get; set; }
+        public DateTime StartTime { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]
@@ -29,5 +29,7 @@ namespace FitGym.WS.Dtos
         [Required]
         [Range(1, Int32.MaxValue)]
         public int EstablishmentId { get; set; }
+
+        public ICollection<ActivityDetailDto> ActivityDetail { get; set; }
     }
 }
