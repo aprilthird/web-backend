@@ -14,8 +14,8 @@ namespace FitGym.WS.Controllers.FitGymApi
 {
     public class GymCompaniesController : ApiController
     {
-        private FitGymEntities _context;
         private string EntityName = "Gym Company";
+        private FitGymEntities _context;
 
         public GymCompaniesController()
         {
@@ -26,7 +26,7 @@ namespace FitGym.WS.Controllers.FitGymApi
         public IHttpActionResult GetGymCompanies()
         {
             dynamic Response = new ExpandoObject();
-
+            
             try
             {
                 Response.Status = ConstantValues.ResponseStatus.OK;
@@ -45,7 +45,7 @@ namespace FitGym.WS.Controllers.FitGymApi
         public IHttpActionResult GetGymCompany(int id)
         {
             dynamic Response = new ExpandoObject();
-
+            
             try
             {
                 GymCompany gymCompany = _context.GymCompany.SingleOrDefault(c => c.GymCompanyId == id);
@@ -75,7 +75,7 @@ namespace FitGym.WS.Controllers.FitGymApi
         public IHttpActionResult CreateGymCompany(GymCompanyDto gymCompanyDto)
         {
             dynamic Response = new ExpandoObject();
-
+            
             try
             {
                 if (!ModelState.IsValid)
@@ -109,7 +109,7 @@ namespace FitGym.WS.Controllers.FitGymApi
         public IHttpActionResult UpdateGymCompany(int id, GymCompanyDto gymCompanyDto)
         {
             dynamic Response = new ExpandoObject();
-
+            
             try
             {
                 if (!ModelState.IsValid)
@@ -149,7 +149,7 @@ namespace FitGym.WS.Controllers.FitGymApi
         public IHttpActionResult DeleteGymCompany(int id)
         {
             dynamic Response = new ExpandoObject();
-
+            
             try
             {
                 var gymCompany = _context.GymCompany.SingleOrDefault(g => g.GymCompanyId == id);
