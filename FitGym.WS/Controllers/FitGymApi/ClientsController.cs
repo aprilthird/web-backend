@@ -8,6 +8,7 @@ using System.Web.Http;
 using AutoMapper;
 using FitGym.WS.Dtos;
 using FitGym.WS.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace FitGym.WS.Controllers.FitGymApi
 {
@@ -23,7 +24,7 @@ namespace FitGym.WS.Controllers.FitGymApi
 
         // GET /fitgymapi/clients
         [HttpGet]
-        public IHttpActionResult GetClients(int? personalTrainerId = null)
+        public IHttpActionResult GetClients(int? personalTrainerId = null, int? gymCompanyId = null, string query = "")
         {
             dynamic Response = new ExpandoObject();
 
@@ -33,8 +34,14 @@ namespace FitGym.WS.Controllers.FitGymApi
 
                 var clients = _context.Client.ToList();
 
+                if (gymCompanyId.HasValue)
+                    clients = clients.Where(c => c.PersonalTrainer.GymCompanyId == gymCompanyId.Value).ToList();
+
                 if (personalTrainerId.HasValue)
                     clients = clients.Where(c => c.PersonalTrainerId == personalTrainerId.Value).ToList();
+
+                if (!query.IsNullOrWhiteSpace())
+                    clients = clients.Where(c => c.FirstName.Contains(query) || c.LastName.Contains(query)).ToList();
 
                 Response.Client = clients.Select(Mapper.Map<Client, ClientDto>);
                 return Ok(Response);
@@ -79,7 +86,7 @@ namespace FitGym.WS.Controllers.FitGymApi
 
         // POST /fitgymapi/clients
         [HttpPost]
-        public IHttpActionResult CreateClient (ClientDto clientDto)
+        public IHttpActionResult CreateClient (ClientDto clientDto, AccountDto accountDto)
         {
             dynamic Response = new ExpandoObject();
 
@@ -93,6 +100,7 @@ namespace FitGym.WS.Controllers.FitGymApi
                 }
 
                 var client = Mapper.Map<ClientDto, Client>(clientDto);
+                client.Password = accountDto.Password;
                 _context.Client.Add(client);
                 _context.SaveChanges();
 

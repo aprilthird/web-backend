@@ -12,16 +12,25 @@ namespace FitGym.WS.App_Start
     {
         public MappingProfile()
         {
-            CreateMap<GymCompany, GymCompanyDto>();
-            CreateMap<GymCompanyDto, GymCompany>().ForMember(m => m.GymCompanyId, opt => opt.Ignore());
+            CreateMap<GymCompany, GymCompanyDto>().ForMember(m => m.Password, opt => opt.Ignore());
+            CreateMap<GymCompanyDto, GymCompany>()
+                .ForMember(m => m.GymCompanyId, opt => opt.Ignore())
+                .ForMember(m => m.CreatedAt, opt => opt.Ignore())
+                .ForMember(m => m.UpdatedAt, opt => opt.Ignore());
             CreateMap<SubscriptionType, SubscriptionTypeDto>();
             CreateMap<SubscriptionTypeDto, SubscriptionType>().ForMember(m => m.SubscriptionTypeId, opt => opt.Ignore());
             CreateMap<Subscription, SubscriptionDto>();
             CreateMap<SubscriptionDto, Subscription>().ForMember(m => m.SubscriptionId, opt => opt.Ignore());
-            CreateMap<PersonalTrainer, PersonalTrainerDto>();
-            CreateMap<PersonalTrainerDto, PersonalTrainer>().ForMember(m => m.PersonalTrainerId, opt => opt.Ignore());
-            CreateMap<Client, ClientDto>();
-            CreateMap<ClientDto, Client>().ForMember(m => m.ClientId, opt => opt.Ignore());
+            CreateMap<PersonalTrainer, PersonalTrainerDto>().ForMember(m => m.Password, opt => opt.Ignore());
+            CreateMap<PersonalTrainerDto, PersonalTrainer>()
+                .ForMember(m => m.PersonalTrainerId, opt => opt.Ignore())
+                .ForMember(m => m.CreatedAt, opt => opt.Ignore())
+                .ForMember(m => m.UpdatedAt, opt => opt.Ignore());
+            CreateMap<Client, ClientDto>().ForMember(m => m.Password, opt => opt.Ignore());
+            CreateMap<ClientDto, Client>()
+                .ForMember(m => m.ClientId, opt => opt.Ignore())
+                .ForMember(m => m.CreatedAt, opt => opt.Ignore())
+                .ForMember(m => m.UpdatedAt, opt => opt.Ignore());
             CreateMap<Establishment, EstablishmentDto>();
             CreateMap<EstablishmentDto, Establishment>().ForMember(m => m.EstablishmentId, opt => opt.Ignore());
             CreateMap<ActivityType, ActivityTypeDto>();

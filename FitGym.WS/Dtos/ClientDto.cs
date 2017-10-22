@@ -50,5 +50,15 @@ namespace FitGym.WS.Dtos
         [Required]
         [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
+
+        [Required(AllowEmptyStrings = false)]
+        [StringLength(3)]
+        public string Gender { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+
+        public DateTime UpdatedAt { get; set; }
+
+        public string PhotoUrl { get; set; }
     }
 }

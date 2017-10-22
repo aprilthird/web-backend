@@ -29,6 +29,11 @@ namespace FitGym.WS.Models
         public string PhoneNumber { get; set; }
         public string Status { get; set; }
         public string Address { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public System.DateTime BirthDate { get; set; }
+        public string PhotoUrl { get; set; }
+        public string Gender { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Client> Client { get; set; }

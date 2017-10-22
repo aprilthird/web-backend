@@ -28,10 +28,10 @@ namespace FitGym.WS.Controllers.FitGymApi
 
             try
             {
-                var client = _context.GymCompany.SingleOrDefault(c =>
+                var gymCompany = _context.GymCompany.SingleOrDefault(c =>
                     c.Username.Equals(accountDto.Username) && c.Password.Equals(accountDto.Password));
 
-                if (client == null)
+                if (gymCompany == null)
                 {
                     Response.Status = ConstantValues.ResponseStatus.ERROR;
                     Response.Message = string.Format(ConstantValues.ErrorMessage.NOT_FOUND, EntityName, "#");
@@ -40,6 +40,7 @@ namespace FitGym.WS.Controllers.FitGymApi
 
                 Response.Status = ConstantValues.ResponseStatus.OK;
                 Response.Token = "8%3v9d0vsC31#%$55ferAT132PO9302casc1353";
+                Response.GymCompany = gymCompany; 
                 return Content(HttpStatusCode.OK, Response);
             }
             catch (Exception e)

@@ -29,6 +29,9 @@ namespace FitGym.WS.Models
         public string Password { get; set; }
         public string Status { get; set; }
         public string PhoneNumber { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
+        public string UrlLogo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ActivityType> ActivityType { get; set; }

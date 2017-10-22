@@ -8,6 +8,7 @@ using System.Web.Http;
 using AutoMapper;
 using FitGym.WS.Dtos;
 using FitGym.WS.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace FitGym.WS.Controllers.FitGymApi
 {
@@ -24,7 +25,7 @@ namespace FitGym.WS.Controllers.FitGymApi
 
         // GET /fitgymapi/personaltrainers
         [HttpGet]
-        public IHttpActionResult GetPersonalTrainers(int? gymCompanyId = null)
+        public IHttpActionResult GetPersonalTrainers(int? gymCompanyId = null, string query = "")
         {
             dynamic Response = new ExpandoObject();
 
@@ -36,6 +37,9 @@ namespace FitGym.WS.Controllers.FitGymApi
 
                 if (gymCompanyId.HasValue)
                     personalTrainers = personalTrainers.Where(p => p.GymCompanyId == gymCompanyId.Value).ToList();
+
+                if (!query.IsNullOrWhiteSpace())
+                    personalTrainers = personalTrainers.Where(p => p.FirstName.Contains(query) || p.LastName.Contains(query)).ToList();
 
                 Response.PersonalTrainers = personalTrainers.Select(Mapper.Map<PersonalTrainer, PersonalTrainerDto>);
                 return Ok(Response);
@@ -80,7 +84,7 @@ namespace FitGym.WS.Controllers.FitGymApi
 
         // POST /fitgymapi/personaltrainers
         [HttpPost]
-        public IHttpActionResult CreatePersonalTrainer(PersonalTrainerDto personalTrainerDto)
+        public IHttpActionResult CreatePersonalTrainer(PersonalTrainerDto personalTrainerDto, AccountDto accountDto)
         {
             dynamic Response = new ExpandoObject();
 
@@ -94,6 +98,7 @@ namespace FitGym.WS.Controllers.FitGymApi
                 }
 
                 var personalTrainer = Mapper.Map<PersonalTrainerDto, PersonalTrainer>(personalTrainerDto);
+                personalTrainer.Password = accountDto.Password;
                 _context.PersonalTrainer.Add(personalTrainer);
                 _context.SaveChanges();
 

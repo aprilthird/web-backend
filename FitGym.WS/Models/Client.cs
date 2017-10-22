@@ -33,6 +33,10 @@ namespace FitGym.WS.Models
         public decimal Height { get; set; }
         public System.DateTime BirthDate { get; set; }
         public int PersonalTrainerId { get; set; }
+        public string PhotoUrl { get; set; }
+        public string Gender { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Activity> Activity { get; set; }

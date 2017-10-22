@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Results;
 using AutoMapper;
 using FitGym.WS.Dtos;
 using FitGym.WS.Models;
@@ -23,6 +20,7 @@ namespace FitGym.WS.Controllers.FitGymApi
         }
 
         // GET /fitgymapi/gymcompanies
+        [HttpGet]
         public IHttpActionResult GetGymCompanies()
         {
             dynamic Response = new ExpandoObject();
@@ -30,7 +28,7 @@ namespace FitGym.WS.Controllers.FitGymApi
             try
             {
                 Response.Status = ConstantValues.ResponseStatus.OK;
-                Response.GymCompanies = _context.GymCompany.ToList().Select(Mapper.Map<GymCompany, GymCompanyDto>);                
+                Response.GymCompanies = _context.GymCompany.ToList().Select(Mapper.Map<GymCompany, GymCompanyDto>); 
                 return Ok(Response);
             }
             catch (Exception e)
@@ -86,6 +84,8 @@ namespace FitGym.WS.Controllers.FitGymApi
                 }
 
                 var gymCompany = Mapper.Map<GymCompanyDto, GymCompany>(gymCompanyDto);
+                gymCompany.CreatedAt = DateTime.Now;
+                gymCompany.UpdatedAt = DateTime.Now;
                 _context.GymCompany.Add(gymCompany);
                 _context.SaveChanges();
 
@@ -129,6 +129,7 @@ namespace FitGym.WS.Controllers.FitGymApi
                 }
 
                 Mapper.Map(gymCompanyDto, gymCompanyInDb);
+                gymCompanyInDb.UpdatedAt = DateTime.Now;
                 _context.SaveChanges();
 
                 gymCompanyDto.GymCompanyId = id;
@@ -162,6 +163,7 @@ namespace FitGym.WS.Controllers.FitGymApi
                 }
 
                 gymCompany.Status = ConstantValues.EntityStatus.INACTIVE;
+                gymCompany.UpdatedAt = DateTime.Now;
                 _context.SaveChanges();
 
                 Response.Status = ConstantValues.ResponseStatus.OK;
