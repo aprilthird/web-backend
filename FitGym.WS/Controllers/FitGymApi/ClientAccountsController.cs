@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using AutoMapper;
 using FitGym.WS.Dtos;
 using FitGym.WS.Models;
 
@@ -40,7 +41,7 @@ namespace FitGym.WS.Controllers.FitGymApi
 
                 Response.Status = ConstantValues.ResponseStatus.OK;
                 Response.Token = "8%3v9d0vsC31#%$55ferAT132PO9302casc1353";
-                Response.Client = client;
+                Response.Client = Mapper.Map<Client, ClientDto>(client);
                 return Content(HttpStatusCode.OK, Response);
             }
             catch (Exception e)

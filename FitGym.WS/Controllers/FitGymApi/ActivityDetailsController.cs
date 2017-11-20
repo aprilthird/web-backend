@@ -8,40 +8,35 @@ using System.Web.Http;
 using AutoMapper;
 using FitGym.WS.Dtos;
 using FitGym.WS.Models;
-using Microsoft.Ajax.Utilities;
 
 namespace FitGym.WS.Controllers.FitGymApi
 {
-    public class PersonalTrainersController : ApiController
+    public class ActivityDetailsController : ApiController
     {
         private FitGymEntities _context;
-        private string EntityName = "Personal Trainer";
+        private string EntityName = "Activity Detail";
 
-        public PersonalTrainersController()
+        public ActivityDetailsController()
         {
             _context = new FitGymEntities();
         }
 
-
-        // GET /fitgymapi/personaltrainers
+        // GET /fitgymapi/activitydetails
         [HttpGet]
-        public IHttpActionResult GetPersonalTrainers(int? gymCompanyId = null, string query = "")
+        public IHttpActionResult GetActivityDetails(int? activityId = null)
         {
             dynamic Response = new ExpandoObject();
 
             try
             {
                 Response.Status = ConstantValues.ResponseStatus.OK;
+                
+                var activityDetails = _context.ActivityDetail.ToList();
 
-                var personalTrainers = _context.PersonalTrainer.ToList();
+                if (activityId.HasValue)
+                    activityDetails = activityDetails.Where(a => a.ActivityId == activityId.Value).ToList();
 
-                if (gymCompanyId.HasValue)
-                    personalTrainers = personalTrainers.Where(p => p.GymCompanyId == gymCompanyId.Value).ToList();
-
-                if (!query.IsNullOrWhiteSpace())
-                    personalTrainers = personalTrainers.Where(p => p.FirstName.Contains(query) || p.LastName.Contains(query)).ToList();
-
-                Response.PersonalTrainers = personalTrainers.Select(Mapper.Map<PersonalTrainer, PersonalTrainerDto>);
+                Response.ActivityDetails = activityDetails.Select(Mapper.Map<ActivityDetail, ActivityDetailDto>);
                 return Ok(Response);
             }
             catch (Exception e)
@@ -52,17 +47,17 @@ namespace FitGym.WS.Controllers.FitGymApi
             }
         }
 
-        // GET /fitgymapi/personaltrainers/{id}
+        // GET /fitgymapi/activitydetails/{id}
         [HttpGet]
-        public IHttpActionResult GetPersonalTrainer(int id)
+        public IHttpActionResult GetActivityDetail(int id)
         {
             dynamic Response = new ExpandoObject();
 
             try
             {
-                PersonalTrainer personalTrainer = _context.PersonalTrainer.SingleOrDefault(p => p.PersonalTrainerId == id);
+                ActivityDetail activityDetail = _context.ActivityDetail.SingleOrDefault(a => a.ActivityDetailId == id);
 
-                if (personalTrainer == null)
+                if (activityDetail == null)
                 {
                     Response.Status = ConstantValues.ResponseStatus.ERROR;
                     Response.Message = string.Format(ConstantValues.ErrorMessage.NOT_FOUND, EntityName, id);
@@ -70,7 +65,7 @@ namespace FitGym.WS.Controllers.FitGymApi
                 }
 
                 Response.Status = ConstantValues.ResponseStatus.OK;
-                Response.PersonalTrainer = Mapper.Map<PersonalTrainer, PersonalTrainerDto>(personalTrainer);
+                Response.ActivityDetail = Mapper.Map<ActivityDetail, ActivityDetailDto>(activityDetail);
                 return Ok(Response);
             }
             catch (Exception e)
@@ -82,9 +77,9 @@ namespace FitGym.WS.Controllers.FitGymApi
         }
 
 
-        // POST /fitgymapi/personaltrainers
+        // POST /fitgymapi/activitydetails
         [HttpPost]
-        public IHttpActionResult CreatePersonalTrainer(PersonalTrainerDto personalTrainerDto)
+        public IHttpActionResult CreateActivityDetail(ActivityDetailDto activityDetailDto)
         {
             dynamic Response = new ExpandoObject();
 
@@ -97,19 +92,15 @@ namespace FitGym.WS.Controllers.FitGymApi
                     return Content(HttpStatusCode.BadRequest, Response);
                 }
 
-                var personalTrainer = Mapper.Map<PersonalTrainerDto, PersonalTrainer>(personalTrainerDto);
-                personalTrainer.CreatedAt = DateTime.Now;
-                personalTrainer.UpdatedAt = DateTime.Now;
-                personalTrainer.Status = ConstantValues.EntityStatus.ACTIVE;
-                _context.PersonalTrainer.Add(personalTrainer);
+                var activityDetail = Mapper.Map<ActivityDetailDto, ActivityDetail>(activityDetailDto);
+                _context.ActivityDetail.Add(activityDetail);
                 _context.SaveChanges();
 
-                personalTrainerDto.PersonalTrainerId = personalTrainer.PersonalTrainerId;
-
+                activityDetailDto.ActivityDetailId = activityDetail.ActivityDetailId;
                 Response.Status = ConstantValues.ResponseStatus.OK;
-                Response.PersonalTrainer = personalTrainerDto;
+                Response.ActivityDetail = activityDetailDto;
 
-                return Created(new Uri(Request.RequestUri + "/" + personalTrainer.PersonalTrainerId), Response);
+                return Created(new Uri(Request.RequestUri + "/" + activityDetail.ActivityId), Response);
             }
             catch (Exception e)
             {
@@ -119,9 +110,9 @@ namespace FitGym.WS.Controllers.FitGymApi
             }
         }
 
-        // PUT /fitgymapi/personaltrainers/{id}
+        // PUT /fitgymapi/activitydetails/{id}
         [HttpPut]
-        public IHttpActionResult UpdatePersonalTrainer(int id, PersonalTrainerDto personalTrainerDto)
+        public IHttpActionResult UpdateActivityDetail(int id, ActivityDetailDto activityDetailDto)
         {
             dynamic Response = new ExpandoObject();
 
@@ -134,22 +125,21 @@ namespace FitGym.WS.Controllers.FitGymApi
                     return Content(HttpStatusCode.BadRequest, Response);
                 }
 
-                var personalTrainerInDb = _context.PersonalTrainer.SingleOrDefault(p => p.PersonalTrainerId == id);
+                var activityDetailInDb = _context.ActivityDetail.SingleOrDefault(a => a.ActivityDetailId == id);
 
-                if (personalTrainerInDb == null)
+                if (activityDetailInDb == null)
                 {
                     Response.Status = ConstantValues.ResponseStatus.ERROR;
                     Response.Message = string.Format(ConstantValues.ErrorMessage.NOT_FOUND, EntityName, id);
                     return Content(HttpStatusCode.NotFound, Response);
                 }
 
-                Mapper.Map(personalTrainerDto, personalTrainerInDb);
-                personalTrainerInDb.UpdatedAt = DateTime.Now;
+                Mapper.Map(activityDetailDto, activityDetailInDb);
                 _context.SaveChanges();
 
-                personalTrainerDto.PersonalTrainerId = id;
+                activityDetailDto.ActivityDetailId = id;
                 Response.Status = ConstantValues.ResponseStatus.OK;
-                Response.PersonalTrainer = personalTrainerDto;
+                Response.Activity = activityDetailDto;
                 return Ok(Response);
             }
             catch (Exception e)
@@ -160,25 +150,25 @@ namespace FitGym.WS.Controllers.FitGymApi
             }
         }
 
-        // DELETE /fitgymapi/personaltrainers/{id}
+        // DELETE /fitgymapi/activitydetails/{id}
         [HttpDelete]
-        public IHttpActionResult DeletePersonalTrainer(int id)
+        public IHttpActionResult DeleteActivity(int id)
         {
             dynamic Response = new ExpandoObject();
 
             try
             {
-                var personalTrainer = _context.PersonalTrainer.SingleOrDefault(p => p.PersonalTrainerId == id);
+                var activityDetail = _context.ActivityDetail.SingleOrDefault(a => a.ActivityDetailId == id);
 
-                if (personalTrainer == null)
+                if (activityDetail == null)
                 {
                     Response.Status = ConstantValues.ResponseStatus.ERROR;
                     Response.Message = string.Format(ConstantValues.ErrorMessage.NOT_FOUND, EntityName, id);
                     return Content(HttpStatusCode.NotFound, Response);
                 }
 
-                personalTrainer.Status = ConstantValues.EntityStatus.INACTIVE;
-                personalTrainer.UpdatedAt = DateTime.Now;
+                //activityDetail.Status = ConstantValues.EntityStatus.INACTIVE;
+                _context.ActivityDetail.Remove(activityDetail);
                 _context.SaveChanges();
 
                 Response.Status = ConstantValues.ResponseStatus.OK;
@@ -192,4 +182,5 @@ namespace FitGym.WS.Controllers.FitGymApi
             }
         }
     }
+
 }

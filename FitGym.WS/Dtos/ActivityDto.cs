@@ -29,7 +29,5 @@ namespace FitGym.WS.Dtos
         [Required]
         [Range(1, Int32.MaxValue)]
         public int EstablishmentId { get; set; }
-
-        public ICollection<ActivityDetailDto> ActivityDetail { get; set; }
     }
 }

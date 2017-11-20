@@ -25,9 +25,7 @@ namespace FitGym.WS.Dtos
         [Required(AllowEmptyStrings = false)]
         [StringLength(15)]
         public string PhoneNumber { get; set; }
-
-        [Required(AllowEmptyStrings = false)]
-        [StringLength(3)]
+        
         public string Status { get; set; }
 
         public string CreatedAt { get; set; }

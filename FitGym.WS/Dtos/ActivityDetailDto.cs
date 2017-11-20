@@ -21,5 +21,9 @@ namespace FitGym.WS.Dtos
         [Required]
         [Range(1, Int32.MaxValue)]
         public int ActivityTypeId { get; set; }
+
+        [Required]
+        [StringLength(120)]
+        public string Description { get; set; }
     }
 }

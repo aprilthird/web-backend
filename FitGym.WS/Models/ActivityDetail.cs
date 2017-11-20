@@ -18,6 +18,7 @@ namespace FitGym.WS.Models
         public int ActivityId { get; set; }
         public int QRepetition { get; set; }
         public int ActivityTypeId { get; set; }
+        public string Description { get; set; }
     
         public virtual Activity Activity { get; set; }
         public virtual ActivityType ActivityType { get; set; }

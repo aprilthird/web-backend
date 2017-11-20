@@ -14,7 +14,7 @@ namespace FitGym.WS.Controllers.FitGymApi
     public class ActivitiesController : ApiController
     {
         private FitGymEntities _context;
-        private string EntityName = "Acitivity";
+        private string EntityName = "Activity";
 
         public ActivitiesController()
         {

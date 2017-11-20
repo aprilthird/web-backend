@@ -26,6 +26,8 @@ namespace FitGym.WS.Models
         public int GymCompanyId { get; set; }
         public decimal LocationX { get; set; }
         public decimal LocationY { get; set; }
+        public System.DateTime CreatedAt { get; set; }
+        public System.DateTime UpdatedAt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Activity> Activity { get; set; }

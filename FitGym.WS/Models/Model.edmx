@@ -24,6 +24,7 @@
           <Property Name="ActivityId" Type="int" Nullable="false" />
           <Property Name="QRepetition" Type="int" Nullable="false" />
           <Property Name="ActivityTypeId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="120" Nullable="false" />
         </EntityType>
         <EntityType Name="ActivityType">
           <Key>
@@ -64,9 +65,9 @@
           <Property Name="BirthDate" Type="date" Nullable="false" />
           <Property Name="PersonalTrainerId" Type="int" Nullable="false" />
           <Property Name="PhotoUrl" Type="varchar" MaxLength="200" />
-          <Property Name="Gender" Type="varchar" MaxLength="3" Nullable="false" />
           <Property Name="CreatedAt" Type="datetime" />
           <Property Name="UpdatedAt" Type="datetime" />
+          <Property Name="Gender" Type="varchar" MaxLength="3" Nullable="false" />
         </EntityType>
         <EntityType Name="Diet">
           <Key>
@@ -85,6 +86,8 @@
           <Property Name="GymCompanyId" Type="int" Nullable="false" />
           <Property Name="LocationX" Type="decimal" Precision="18" Scale="6" Nullable="false" />
           <Property Name="LocationY" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Evaluation">
           <Key>
@@ -531,6 +534,7 @@
           <Property Name="ActivityTypeId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Activity" Relationship="Self.FK_ActivityDetail_Activity" FromRole="ActivityDetail" ToRole="Activity" />
           <NavigationProperty Name="ActivityType" Relationship="Self.FK_ActivityDetail_ActivityType" FromRole="ActivityDetail" ToRole="ActivityType" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ActivityType">
           <Key>
@@ -574,14 +578,14 @@
           <Property Name="Height" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
           <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="PersonalTrainerId" Type="Int32" Nullable="false" />
+          <Property Name="PhotoUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+          <Property Name="Gender" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Activity" Relationship="Self.FK_Activity_Client" FromRole="Client" ToRole="Activity" />
           <NavigationProperty Name="BodyMeasurements" Relationship="Self.FK_BodyMeasurements_Client" FromRole="Client" ToRole="BodyMeasurements" />
           <NavigationProperty Name="PersonalTrainer" Relationship="Self.FK_Client_PersonalTrainer" FromRole="Client" ToRole="PersonalTrainer" />
           <NavigationProperty Name="Goal" Relationship="Self.FK_Goal_Client" FromRole="Client" ToRole="Goal" />
-          <Property Name="PhotoUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Gender" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Diet">
           <Key>
@@ -604,6 +608,8 @@
           <Property Name="LocationY" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
           <NavigationProperty Name="Activity" Relationship="Self.FK_Activity_Establishment" FromRole="Establishment" ToRole="Activity" />
           <NavigationProperty Name="GymCompany" Relationship="Self.FK_Establishment_GymCompany" FromRole="Establishment" ToRole="GymCompany" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Evaluation">
           <Key>
@@ -662,13 +668,13 @@
           <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Status" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+          <Property Name="UrlLogo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ActivityType" Relationship="Self.FK_ActivityType_GymCompany" FromRole="GymCompany" ToRole="ActivityType" />
           <NavigationProperty Name="Establishment" Relationship="Self.FK_Establishment_GymCompany" FromRole="GymCompany" ToRole="Establishment" />
           <NavigationProperty Name="PersonalTrainer" Relationship="Self.FK_PersonalTrainer_GymCompany" FromRole="GymCompany" ToRole="PersonalTrainer" />
           <NavigationProperty Name="Subscription" Relationship="Self.FK_Suscription_GymCompany" FromRole="GymCompany" ToRole="Subscription" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
-          <Property Name="UrlLogo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PersonalTrainer">
           <Key>
@@ -683,13 +689,13 @@
           <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Status" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="Self.FK_Client_PersonalTrainer" FromRole="PersonalTrainer" ToRole="Client" />
-          <NavigationProperty Name="GymCompany" Relationship="Self.FK_PersonalTrainer_GymCompany" FromRole="PersonalTrainer" ToRole="GymCompany" />
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
           <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="PhotoUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Gender" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Client_PersonalTrainer" FromRole="PersonalTrainer" ToRole="Client" />
+          <NavigationProperty Name="GymCompany" Relationship="Self.FK_PersonalTrainer_GymCompany" FromRole="PersonalTrainer" ToRole="GymCompany" />
         </EntityType>
         <EntityType Name="QuantityMeasurement">
           <Key>
@@ -1060,6 +1066,7 @@
           <EntitySetMapping Name="ActivityDetail">
             <EntityTypeMapping TypeName="FitGymModel.ActivityDetail">
               <MappingFragment StoreEntitySet="ActivityDetail">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ActivityDetailId" ColumnName="ActivityDetailId" />
                 <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
                 <ScalarProperty Name="QRepetition" ColumnName="QRepetition" />
@@ -1095,10 +1102,6 @@
           <EntitySetMapping Name="Client">
             <EntityTypeMapping TypeName="FitGymModel.Client">
               <MappingFragment StoreEntitySet="Client">
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="PhotoUrl" ColumnName="PhotoUrl" />
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -1110,6 +1113,10 @@
                 <ScalarProperty Name="Height" ColumnName="Height" />
                 <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
                 <ScalarProperty Name="PersonalTrainerId" ColumnName="PersonalTrainerId" />
+                <ScalarProperty Name="PhotoUrl" ColumnName="PhotoUrl" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1124,6 +1131,8 @@
           <EntitySetMapping Name="Establishment">
             <EntityTypeMapping TypeName="FitGymModel.Establishment">
               <MappingFragment StoreEntitySet="Establishment">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="EstablishmentId" ColumnName="EstablishmentId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
@@ -1179,26 +1188,21 @@
           <EntitySetMapping Name="GymCompany">
             <EntityTypeMapping TypeName="FitGymModel.GymCompany">
               <MappingFragment StoreEntitySet="GymCompany">
-                <ScalarProperty Name="UrlLogo" ColumnName="UrlLogo" />
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="GymCompanyId" ColumnName="GymCompanyId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="UrlLogo" ColumnName="UrlLogo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PersonalTrainer">
             <EntityTypeMapping TypeName="FitGymModel.PersonalTrainer">
               <MappingFragment StoreEntitySet="PersonalTrainer">
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="PhotoUrl" ColumnName="PhotoUrl" />
-                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="PersonalTrainerId" ColumnName="PersonalTrainerId" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -1208,6 +1212,11 @@
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="PhotoUrl" ColumnName="PhotoUrl" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

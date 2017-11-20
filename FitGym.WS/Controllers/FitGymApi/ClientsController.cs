@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Routing;
 using AutoMapper;
 using FitGym.WS.Dtos;
 using FitGym.WS.Models;
@@ -43,7 +44,7 @@ namespace FitGym.WS.Controllers.FitGymApi
                 if (!query.IsNullOrWhiteSpace())
                     clients = clients.Where(c => c.FirstName.Contains(query) || c.LastName.Contains(query)).ToList();
 
-                Response.Client = clients.Select(Mapper.Map<Client, ClientDto>);
+                Response.Clients = clients.Select(Mapper.Map<Client, ClientDto>);
                 return Ok(Response);
             }
             catch (Exception e)
@@ -72,7 +73,7 @@ namespace FitGym.WS.Controllers.FitGymApi
                 }
 
                 Response.Status = ConstantValues.ResponseStatus.OK;
-                Response.PersonalTrainer = Mapper.Map<Client, ClientDto>(client);
+                Response.Client = Mapper.Map<Client, ClientDto>(client);
                 return Ok(Response);
             }
             catch (Exception e)
@@ -83,10 +84,33 @@ namespace FitGym.WS.Controllers.FitGymApi
             }
         }
 
+        // GET /fitgymapi/personaltrainers/{personalTrainerId}/clients
+        [HttpGet]
+        [Route("fitgymapi/v1/personaltrainers/{personalTrainerId}/clients")]
+        public IHttpActionResult GetClientsByPersonalTrainer(int personalTrainerId)
+        {
+            dynamic Response = new ExpandoObject();
+
+            try
+            {
+                Response.Status = ConstantValues.ResponseStatus.OK;
+
+                var clients = _context.Client.Where(c => c.PersonalTrainerId.Equals(personalTrainerId)).ToList();
+
+                Response.Clients = clients.Select(Mapper.Map<Client, ClientDto>);
+                return Ok(Response);
+            }
+            catch (Exception e)
+            {
+                Response.Status = ConstantValues.ResponseStatus.ERROR;
+                Response.Message = ConstantValues.ErrorMessage.INTERNAL_SERVER_ERROR;
+                return Content(HttpStatusCode.InternalServerError, Response);
+            }
+        }
 
         // POST /fitgymapi/clients
         [HttpPost]
-        public IHttpActionResult CreateClient (ClientDto clientDto, AccountDto accountDto)
+        public IHttpActionResult CreateClient (ClientDto clientDto)
         {
             dynamic Response = new ExpandoObject();
 
@@ -100,7 +124,9 @@ namespace FitGym.WS.Controllers.FitGymApi
                 }
 
                 var client = Mapper.Map<ClientDto, Client>(clientDto);
-                client.Password = accountDto.Password;
+                client.CreatedAt = DateTime.Now;
+                client.UpdatedAt = DateTime.Now;
+                client.Status = ConstantValues.EntityStatus.ACTIVE;
                 _context.Client.Add(client);
                 _context.SaveChanges();
 
@@ -144,6 +170,7 @@ namespace FitGym.WS.Controllers.FitGymApi
                 }
 
                 Mapper.Map(clientDto, clientInDb);
+                clientInDb.UpdatedAt = DateTime.Now;
                 _context.SaveChanges();
 
                 clientDto.ClientId = id;
@@ -177,6 +204,7 @@ namespace FitGym.WS.Controllers.FitGymApi
                 }
 
                 client.Status = ConstantValues.EntityStatus.INACTIVE;
+                client.UpdatedAt = DateTime.Now;
                 _context.SaveChanges();
 
                 Response.Status = ConstantValues.ResponseStatus.OK;

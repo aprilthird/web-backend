@@ -259,6 +259,7 @@
     <Compile Include="ConstantValues\ConstantValues.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FitGymApi\ActivitiesController.cs" />
+    <Compile Include="Controllers\FitGymApi\ActivityDetailsController.cs" />
     <Compile Include="Controllers\FitGymApi\ActivityTypesController.cs" />
     <Compile Include="Controllers\FitGymApi\ClientAccountsController.cs" />
     <Compile Include="Controllers\FitGymApi\ClientsController.cs" />
@@ -402,6 +403,9 @@
     </Content>
     <Content Include="Metadata\deploymentTemplates\apiappconfig.azureresource.json" />
     <Content Include="apiapp.json" />
+    <Content Include="ConnectionStrings.config">
+      <SubType>Designer</SubType>
+    </Content>
     <EntityDeploy Include="Models\Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model.Designer.cs</LastGenOutput>
@@ -409,14 +413,12 @@
     <Content Include="Models\Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
-    <Content Include="ConnectionStrings.config">
-      <SubType>Designer</SubType>
-    </Content>
     <None Include="Properties\PublishProfiles\FitGym - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\FitGym - FTP %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\FitGym - FTP %284%29.pubxml" />
     <None Include="Properties\PublishProfiles\FitGym - FTP %285%29.pubxml" />
     <None Include="Properties\PublishProfiles\FitGym - FTP %286%29.pubxml" />
+    <None Include="Properties\PublishProfiles\fitgym - FTP %287%29.pubxml" />
     <None Include="Properties\PublishProfiles\FitGym - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\FitGym - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\FitGym - Web Deploy %283%29.pubxml" />
@@ -427,6 +429,7 @@
     <None Include="Properties\PublishProfiles\FitGym - Web Deploy %286%29.pubxml">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\fitgym - Web Deploy %287%29.pubxml" />
     <None Include="Properties\PublishProfiles\FitGym - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

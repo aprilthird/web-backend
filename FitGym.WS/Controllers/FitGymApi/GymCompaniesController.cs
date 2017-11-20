@@ -43,9 +43,9 @@ namespace FitGym.WS.Controllers.FitGymApi
         public IHttpActionResult GetGymCompany(int id)
         {
             dynamic Response = new ExpandoObject();
-            
             try
             {
+                
                 GymCompany gymCompany = _context.GymCompany.SingleOrDefault(c => c.GymCompanyId == id);
 
                 if (gymCompany == null)
@@ -54,9 +54,9 @@ namespace FitGym.WS.Controllers.FitGymApi
                     Response.Message = string.Format(ConstantValues.ErrorMessage.NOT_FOUND, EntityName, id);
                     return Content(HttpStatusCode.NotFound, Response);
                 }
-
                 Response.Status = ConstantValues.ResponseStatus.OK;
                 Response.GymCompany = Mapper.Map<GymCompany, GymCompanyDto>(gymCompany);
+                
                 return Ok(Response);
             }
             catch (Exception e)
@@ -86,6 +86,7 @@ namespace FitGym.WS.Controllers.FitGymApi
                 var gymCompany = Mapper.Map<GymCompanyDto, GymCompany>(gymCompanyDto);
                 gymCompany.CreatedAt = DateTime.Now;
                 gymCompany.UpdatedAt = DateTime.Now;
+                gymCompany.Status = ConstantValues.EntityStatus.ACTIVE;
                 _context.GymCompany.Add(gymCompany);
                 _context.SaveChanges();
 

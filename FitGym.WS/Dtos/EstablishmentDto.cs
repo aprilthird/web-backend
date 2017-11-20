@@ -22,12 +22,14 @@ namespace FitGym.WS.Dtos
         [Range(Double.MinValue, Double.MaxValue)]
         public decimal LocationY { get; set; }
 
-        [Required(AllowEmptyStrings = false)]
-        [StringLength(3)]
         public string Status { get; set; }
 
         [Required]
         [Range(1, Int32.MaxValue)]
         public int GymCompanyId { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+
+        public DateTime UpdatedAt { get; set; }
     }
 }

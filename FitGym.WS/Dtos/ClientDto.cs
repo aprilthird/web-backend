@@ -34,9 +34,7 @@ namespace FitGym.WS.Dtos
         [Required(AllowEmptyStrings = false)]
         [StringLength(100)]
         public string Password { get; set; }
-
-        [Required(AllowEmptyStrings = false)]
-        [StringLength(3)]
+        
         public string Status { get; set; }
 
         [Required]
