@@ -5,6 +5,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
 using AutoMapper;
 using FitGym.WS.Dtos;
@@ -41,7 +42,8 @@ namespace FitGym.WS.Controllers.FitGymApi
                 }
 
                 Response.Status = ConstantValues.ResponseStatus.OK;
-                Response.Token = "8%3v9d0vsC31#%$55ferAT132PO9302casc1353";
+                String uncoded = personalTrainer.Username + ":" + personalTrainer.Password;
+                Response.Token = Convert.ToBase64String(Encoding.UTF8.GetBytes(uncoded));
                 Response.PersonalTrainer = Mapper.Map<PersonalTrainer, PersonalTrainerDto>(personalTrainer); ;
                 return Content(HttpStatusCode.OK, Response);
             }

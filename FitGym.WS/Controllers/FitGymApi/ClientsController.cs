@@ -13,6 +13,7 @@ using Microsoft.Ajax.Utilities;
 
 namespace FitGym.WS.Controllers.FitGymApi
 {
+    [FitGymAuthenticationAttibute]
     public class ClientsController : ApiController
     {
         private FitGymEntities _context;

@@ -11,6 +11,7 @@ using FitGym.WS.Models;
 
 namespace FitGym.WS.Controllers.FitGymApi
 {
+    [FitGymAuthenticationAttibute]
     public class ActivityDetailsController : ApiController
     {
         private FitGymEntities _context;

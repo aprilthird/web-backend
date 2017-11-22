@@ -261,9 +261,14 @@
     <Compile Include="Controllers\FitGymApi\ActivitiesController.cs" />
     <Compile Include="Controllers\FitGymApi\ActivityDetailsController.cs" />
     <Compile Include="Controllers\FitGymApi\ActivityTypesController.cs" />
+    <Compile Include="Controllers\FitGymApi\Auth\ApiIdentity.cs" />
+    <Compile Include="Controllers\FitGymApi\Auth\AuthorizedController.cs" />
+    <Compile Include="Controllers\FitGymApi\Auth\AuthController.cs" />
+    <Compile Include="Controllers\FitGymApi\Auth\User.cs" />
     <Compile Include="Controllers\FitGymApi\ClientAccountsController.cs" />
     <Compile Include="Controllers\FitGymApi\ClientsController.cs" />
     <Compile Include="Controllers\FitGymApi\EstablishmentsController.cs" />
+    <Compile Include="Controllers\FitGymApi\Auth\FitGymAuthenticationAttribute.cs" />
     <Compile Include="Controllers\FitGymApi\GymCompaniesController.cs" />
     <Compile Include="Controllers\FitGymApi\GymCompanyAccountsController.cs" />
     <Compile Include="Controllers\FitGymApi\PersonalTrainersController.cs" />
@@ -473,6 +478,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

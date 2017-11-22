@@ -9,6 +9,7 @@ using FitGym.WS.Models;
 
 namespace FitGym.WS.Controllers.FitGymApi
 {
+    [FitGymAuthenticationAttibute]
     public class GymCompaniesController : ApiController
     {
         private string EntityName = "Gym Company";
